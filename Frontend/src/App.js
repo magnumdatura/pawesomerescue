@@ -10,9 +10,6 @@ const Archive = React.lazy(() => import("./pages/Archive"));
 const Form = React.lazy(() => import("./pages/Form"));
 
 function App() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-
   return (
     <div className="container">
       <NavBar />

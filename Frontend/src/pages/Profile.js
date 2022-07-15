@@ -148,8 +148,8 @@ function PageThree() {
 
       const data = await res.json();
       // setData(data);
-      console.log(data);
-      setDisplayAll(data);
+      console.log([data]);
+      setDisplayAll([data]);
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -194,7 +194,6 @@ function PageThree() {
     event.preventDefault();
     if (validEmail) {
       fetchSearch("http://localhost:5001/users/user");
-      console.log(displayAll);
     } else {
       window.alert(`DONT BE A STALKER CALL POLIS`);
     }
