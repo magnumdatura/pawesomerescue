@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import ReactContext from "../context/react-context";
 
 // ways to store authorization tokens from JWT in react fetch || this covers what POSTMAN does
 // fetch ('uri', {
@@ -12,16 +13,8 @@ import React, { useState, useEffect } from "react";
 //   }
 // })
 
-function PageThree() {
-  const [access, setAccess] = useState("");
-  const [refresh, setRefresh] = useState("");
-
-  //password1 for the sign up page
-  const [emailInput, setEmailInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
-  const [displayAll, setDisplayAll] = useState("");
-  const [searchInput, setSearchInput] = useState("");
-  const [validEmail, setValidEmail] = useState(false);
+const Profile = () => {
+  const reactCtx = useContext(ReactContext);
 
   //user login details
   //   {
@@ -56,15 +49,15 @@ function PageThree() {
   // POST /login
   const fetchLogin = async (url) => {
     const bod = JSON.stringify({
-      email: emailInput,
-      password: passwordInput,
+      email: reactCtx.emailInput,
+      password: reactCtx.passwordInput,
     });
 
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: "Bearer " + access,
+        authorization: "Bearer " + reactCtx.access,
       },
       body: bod,
     };
@@ -85,8 +78,8 @@ function PageThree() {
       const refresh_token = data.refresh;
       console.log(access_token);
       console.log(refresh_token);
-      setAccess(access_token);
-      setRefresh(refresh_token);
+      reactCtx.setAccess(access_token);
+      reactCtx.setRefresh(refresh_token);
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -99,7 +92,7 @@ function PageThree() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: "Bearer " + access,
+        authorization: "Bearer " + reactCtx.access,
       },
     };
 
@@ -115,7 +108,7 @@ function PageThree() {
       const data = await res.json();
       // setData(data);
       console.log(data);
-      setDisplayAll(data);
+      reactCtx.setDisplayAll(data);
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -125,14 +118,14 @@ function PageThree() {
   // POST /display1 // currently does work, mapping issues
   const fetchSearch = async (url) => {
     const bod = JSON.stringify({
-      email: searchInput,
+      email: reactCtx.searchInput,
     });
 
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: "Bearer " + access,
+        authorization: "Bearer " + reactCtx.access,
       },
       body: bod,
     };
@@ -149,7 +142,7 @@ function PageThree() {
       const data = await res.json();
       // setData(data);
       console.log([data]);
-      setDisplayAll([data]);
+      reactCtx.setDisplayAll([data]);
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -159,26 +152,30 @@ function PageThree() {
   function handleInput(event) {
     event.preventDefault();
     // console.log(event.target.id);
-    if (event.target.id === "email") setEmailInput(event.target.value);
-    if (event.target.id === "password") setPasswordInput(event.target.value);
-    if (event.target.id === "search") setSearchInput(event.target.value);
+    if (event.target.id === "email") reactCtx.setEmailInput(event.target.value);
+    if (event.target.id === "password")
+      reactCtx.setPasswordInput(event.target.value);
+    if (event.target.id === "search")
+      reactCtx.setSearchInput(event.target.value);
   }
 
   // login email validator
   useEffect(() => {
     // checking on keystroke
     // validEmail.current = inputEmail.includes("@");
-    setValidEmail(emailInput.includes("@")); //if input email includes @ then it will setValidEmail as true
-  }, [emailInput]);
+    reactCtx.setValidEmail(reactCtx.emailInput.includes("@")); //if input email includes @ then it will setValidEmail as true
+    // eslint-disable-next-line
+  }, [reactCtx.emailInput]);
 
   // search email validator
   useEffect(() => {
-    setValidEmail(searchInput.includes("@"));
-  }, [searchInput]);
+    reactCtx.setValidEmail(reactCtx.searchInput.includes("@"));
+    // eslint-disable-next-line
+  }, [reactCtx.searchInput]);
 
   function handleLogin(event) {
     event.preventDefault();
-    if (validEmail) {
+    if (reactCtx.validEmail) {
       fetchLogin("http://localhost:5001/users/login");
     } else {
       window.alert(`WRONG ADOPTION SERVER: UR STILL A LOSTBOI MOTHERFUCKER`);
@@ -192,7 +189,7 @@ function PageThree() {
 
   function handleSearch(event) {
     event.preventDefault();
-    if (validEmail) {
+    if (reactCtx.validEmail) {
       fetchSearch("http://localhost:5001/users/user");
     } else {
       window.alert(`DONT BE A STALKER CALL POLIS`);
@@ -223,12 +220,12 @@ function PageThree() {
         ></input>
       </form>
       <button onClick={handleSearch}>Submit the HUNT</button>
-      <p>Access: {access}</p>
+      <p>Access: {reactCtx.access}</p>
       <br></br>
-      <p>Refresh: {refresh}</p>
+      <p>Refresh: {reactCtx.refresh}</p>
       <div>
-        {displayAll &&
-          displayAll.map((data, index) => {
+        {reactCtx.displayAll &&
+          reactCtx.displayAll.map((data, index) => {
             // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
             return (
               <div key={index}>
@@ -244,6 +241,6 @@ function PageThree() {
       </div>
     </div>
   );
-}
+};
 
-export default PageThree;
+export default Profile;
