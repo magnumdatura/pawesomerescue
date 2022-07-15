@@ -19,6 +19,9 @@
 
 .navbar li {
   margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 10rem;
 }
 

@@ -20,6 +20,8 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [validEmail, setValidEmail] = useState(false);
 
+  const [listing, setListing] = useState("");
+
   return (
     <ReactContext.Provider
       // these are not mandatory, the "parent" can choose what data the "child" can access
@@ -38,6 +40,8 @@ function App() {
         setSearchInput,
         validEmail,
         setValidEmail,
+        listing,
+        setListing,
       }}
     >
       <div className="container">
