@@ -14,12 +14,14 @@ function App() {
   const [refresh, setRefresh] = useState("");
 
   //password1 for the sign up page
+  //profile
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [displayAll, setDisplayAll] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [validEmail, setValidEmail] = useState(false);
 
+  //listing
   const [listing, setListing] = useState("");
 
   return (
