@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    company: {
+    profileType: {
       type: String,
       required: true,
     },
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema(
         type: Number,
       },
     },
-    date: {
+    dateCreated: {
       type: Date,
       required: true,
       default: Date.now(),
@@ -35,6 +35,10 @@ const UserSchema = new mongoose.Schema(
     role: {
       type: String,
       required: true,
+      default: "user",
+    },
+    favourites: {
+      type: Array,
     },
   },
   { collection: "users" }
