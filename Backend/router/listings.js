@@ -7,236 +7,178 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 
-const User = require("../models/User");
+const Listing = require("../models/Listing");
 const auth = require("../middleware/auth");
 
-router.post("/login", async (req, res) => {
+const selectParams =
+  "title image petName species breed sex size age medical isArchive favouritesCount ownerContact profileContact dateCreated"; // currently set to all params
+
+// CREATE LISTING
+router.put("/create", auth, async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
-    if (!user) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "not authorised" });
+    if (req.decoded.role === "user") {
+      const createdListing = await Listing.create({
+        title: req.body.title,
+        image: req.body.image,
+        petName: req.body.petName,
+        species: req.body.species,
+        breed: req.body.breed,
+        sex: req.body.sex,
+        size: req.body.size,
+        age: req.body.age,
+        medical: req.body.medical,
+        isArchive: req.body.isArchive,
+        favouritesCount: req.body.favouritesCount,
+        ownerContact: {
+          name: req.body.ownerContact.name,
+          email: req.body.ownerContact.email,
+          phone: req.body.ownerContact.phone,
+          address: req.body.ownerContact.address,
+        },
+        profileContact: {
+          // here links with payload from users /login
+          id: req.decoded.id,
+          name: req.decoded.name,
+          email: req.decoded.email,
+        },
+        comments: req.body.comments,
+        dateCreated: req.body.dateCreated,
+      });
+
+      console.log("created listing:  ", createdListing);
+      res.json({ status: "ok", message: "listing created" });
     }
-
-    const result = await bcrypt.compare(req.body.password, user.hash);
-    if (!result) {
-      console.log("email or password error");
-      return res.status(401).json({ status: "error", message: "login failed" });
-    }
-
-    const payload = {
-      id: user._id,
-      email: user.email,
-      role: user.role,
-    };
-
-    const access = jwt.sign(payload, process.env.ACCESS_SECRET, {
-      expiresIn: "1d", // jwt will automatically convert into milliseconds
-      jwtid: uuidv4(),
-    });
-
-    const refresh = jwt.sign(payload, process.env.REFRESH_SECRET, {
-      expiresIn: "30d", // jwt will automatically convert into milliseconds
-      jwtid: uuidv4(),
-    });
-
-    const response = { access, refresh };
-
-    res.json(response);
   } catch (error) {
-    console.log("POST /login", error); // on server
-    res.status(400).json({ status: "error", message: "login failed" }); // sent to client
-  }
-});
-
-router.post("/refresh", (req, res) => {
-  try {
-    const decoded = jwt.verify(req.body.refresh, process.env.REFRESH_SECRET);
-
-    const payload = {
-      id: decoded.id,
-      email: decoded.email,
-      role: decoded.role,
-    };
-
-    const access = jwt.sign(payload, process.env.ACCESS_SECRET, {
-      expiresIn: "1d", // jwt will automatically convert into milliseconds
-      jwtid: uuidv4(),
-    });
-
-    const response = { access };
-
-    res.json(response);
-  } catch (error) {
-    console.log("POST /refresh", error);
-    res.status(401).json({
+    console.log("PUT /create", error); // on server
+    res.status(400).json({
       status: "error",
-      message: "unauthorised",
-    });
+      message: "failed: listing could not be created",
+    }); // sent to client
   }
 });
 
-router.put("/register", async (req, res) => {
+// DISPLAY ALL LISTINGS
+router.get("/displayAll", async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
-    if (user) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "duplicate email" });
-    }
-
-    function alphanumericCheck(input) {
-      const letterNumber = /^[0-9a-zA-Z]+$/;
-      if (input.match(letterNumber)) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    if (!alphanumericCheck(req.body.password)) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "password is not alphanumeric" });
-    }
-
-    if (req.body.password.length < 12) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "password length is too short" });
-    }
-
-    if (req.body.password !== req.body.password1) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "passwords do not match" });
-    }
-
-    const hash = await bcrypt.hash(req.body.password, 12); // 12-25 is how many times you are salting it
-    const createdUser = await User.create({
-      email: req.body.email,
-      hash: hash,
-      name: req.body.name,
-      company: req.body.company,
-      contact: {
-        address: req.body.contact.address,
-        phone: req.body.contact.phone,
-      },
-      role: req.body.role,
-    });
-
-    console.log("created user: ", createdUser);
-    res.json({ status: "ok", message: "user created" });
+    const allListings = await Listing.find().select(selectParams); // this filters what information we want to send to the front-end (sensitive) **
+    res.json(allListings);
   } catch (error) {
-    console.log("PUT /register", error);
-    res.status(400).json({ status: "error", message: "an error has occurred" });
+    console.log(`GET /displayAll ${error}`);
+    res
+      .status(400)
+      .json({ status: "error", message: "failed: cannot display listings" });
   }
 });
 
-router.get("/users", auth, async (req, res) => {
-  if (req.decoded.role === "admin") {
-    const users = await User.find(); // can add .select("email") to filter results
-    res.json(users);
-  }
-
-  if (req.decoded.role === "user") {
-    const user = await User.find({ email: req.decoded.email });
-    res.json(user);
-  }
-});
-
-router.post("/user", auth, async (req, res) => {
-  if (req.decoded.role === "admin") {
-    const user = await User.findOne({ email: req.body.email });
-    res.json(user);
+// DISPLAY 1 LISTING via ID --> back-end
+router.post("/listing", async (req, res) => {
+  try {
+    const searchListing = await Listing.find(
+      { _id: req.body.id }.select(selectParams)
+    ); // come back to set up more search params
+    res.json(searchListing);
+  } catch (error) {
+    console.log(`POST /listing ${error}`);
+    res
+      .status(400)
+      .json({ status: "error", message: "failed: no such listing found" });
   }
 });
 
-router.patch("/user", auth, async (req, res) => {
+/////////////////////////////////////////////////////
+// SEARCH BAR : generic search filters --> front end        [[ NOT DONE ]]
+/////////////////////////////////////////////////////
+
+// UPDATE LISTING
+router.patch("/edit", auth, async (req, res) => {
+  // update ANY listing as admin
   if (req.decoded.role === "admin") {
-    const currentUserData = await User.findOne({ email: req.body.email });
-    const newUserData = await User.findOneAndUpdate(
-      { email: req.body.email },
+    const anyListingData = await Listing.findOne({ _id: req.body.id });
+    const newListingData = await Listing.findOneAndUpdate(
+      { _id: req.body.id },
       {
         $set: {
-          email: req.body.newemail || currentUserData.email,
-          name: req.body.name || currentUserData.name,
-          company: req.body.company || currentUserData.company,
-          contact: {
-            address:
-              req.body.contact?.address || currentUserData.contact.address,
-            phone: req.body.contact?.phone || currentUserData.contact.phone,
+          title: req.body.title || anyListingData.title, // req.body.newtitle
+          image: req.body.image || anyListingData.image,
+          petName: req.body.petName || anyListingData.petName,
+          species: req.body.species || anyListingData.species,
+          breed: req.body.breed || anyListingData.breed,
+          sex: req.body.sex || anyListingData.sex,
+          size: req.body.size || anyListingData.size,
+          age: req.body.age || anyListingData.age,
+          medical: req.body.medical || anyListingData.medical,
+          isArchive: req.body.isArchive || anyListingData.isArchive,
+          favouritesCount:
+            req.body.favouritesCount || anyListingData.favouritesCount,
+          ownerContact: {
+            name:
+              req.body.ownerContact?.name || anyListingData.ownerContact.name,
+            email:
+              req.body.ownerContact?.email || anyListingData.ownerContact.email,
+            phone:
+              req.body.ownerContact?.phone || anyListingData.ownerContact.phone,
           },
-          role: req.body.role || currentUserData.role,
+          comments: req.body.comments || anyListingData.comments,
         },
       },
       { new: true }
     );
-
-    if (req.body.email === req.decoded.email) {
-      if (req.body.newpassword) {
-        const hash = await bcrypt.hash(req.body.newpassword, 12); // 12-25 is how many times you are salting it
-        const newUserData2 = await User.findOneAndUpdate(
-          { email: req.body.email },
-          {
-            $set: {
-              hash: hash || currentUserData.hash,
-            },
-          },
-          { new: true }
-        );
-        return res.json(newUserData2);
-      }
-    }
-    res.json(newUserData);
+    res.json(newListingData);
   }
 
+  // update own post as user
   if (req.decoded.role === "user") {
-    const currentUserData = await User.findOne({ email: req.decoded.email });
-    const newUserData = await User.findOneAndUpdate(
-      { email: req.decoded.email },
-      {
-        $set: {
-          email: req.body.newemail || currentUserData.email,
-          name: req.body.name || currentUserData.name,
-          company: req.body.company || currentUserData.company,
-          contact: {
-            address:
-              req.body.contact?.address || currentUserData.contact.address,
-            phone: req.body.contact?.phone || currentUserData.contact.phone,
-          },
-        },
-      },
-      { new: true }
-    );
-
-    if (req.body.newpassword) {
-      const hash = await bcrypt.hash(req.body.newpassword, 12); // 12-25 is how many times you are salting it
-      const newUserData2 = await User.findOneAndUpdate(
-        { email: req.decoded.email },
+    const ownListingData = await Listing.findOne({ _id: req.body.id });
+    if (req.decoded.id === ownListingData.profileContact.id) {
+      const newListingData = await Listing.findOneAndUpdate(
+        { _id: req.body.id },
         {
           $set: {
-            hash: hash || currentUserData.hash,
+            title: req.body.title || ownListingData.title, // req.body.newtitle
+            image: req.body.image || ownListingData.image,
+            petName: req.body.petName || ownListingData.petName,
+            species: req.body.species || ownListingData.species,
+            breed: req.body.breed || ownListingData.breed,
+            sex: req.body.sex || ownListingData.sex,
+            size: req.body.size || ownListingData.size,
+            age: req.body.age || ownListingData.age,
+            medical: req.body.medical || ownListingData.medical,
+            isArchive: req.body.isArchive || ownListingData.isArchive,
+            favouritesCount:
+              req.body.favouritesCount || ownListingData.favouritesCount,
+            ownerContact: {
+              name:
+                req.body.ownerContact?.name || ownListingData.ownerContact.name,
+              email:
+                req.body.ownerContact?.email ||
+                ownListingData.ownerContact.email,
+              phone:
+                req.body.ownerContact?.phone ||
+                ownListingData.ownerContact.phone,
+            },
+            comments: req.body.comments || ownListingData.comments,
           },
         },
         { new: true }
       );
-      return res.json(newUserData2);
+      res.json(newListingData);
     }
-    res.json(newUserData);
   }
 });
 
-router.delete("/user", auth, async (req, res) => {
+// DELETE LISTING
+router.delete("/delete", auth, async (req, res) => {
   if (req.decoded.role === "admin") {
-    const user = await User.deleteOne({ email: req.body.email });
-    res.json(user);
+    const deleteListing = await Listing.deleteOne({ _id: req.body.id });
+    res.json(deleteListing);
   }
 
   if (req.decoded.role === "user") {
-    const user = await User.deleteOne({ email: req.decoded.email });
-    res.json(user);
+    const ownListingData = await Listing.findOne({ _id: req.body.id });
+    if (req.decoded.id === ownListingData.profileContact.id) {
+      const deleteListing = await Listing.deleteOne({ _id: req.body.id });
+      res.json(deleteListing);
+    }
   }
 });
 

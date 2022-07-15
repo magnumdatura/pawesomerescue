@@ -2,39 +2,86 @@ const mongoose = require("mongoose");
 
 const ListingSchema = new mongoose.Schema(
   {
-    email: {
+    title: {
       type: String,
-      required: true,
-      unique: true,
     },
-    hash: {
+    image: {
+      data: Buffer, // how to store our images **
       type: String,
-      required: true,
+      // required: true,
+      // unique: true,
     },
-    name: {
-      type: String,
-      required: true,
-    },
-    company: {
+    petName: {
       type: String,
       required: true,
     },
-    contact: {
-      address: {
-        type: String,
+    species: {
+      type: String,
+      required: true,
+    },
+    breed: {
+      type: String,
+      required: true,
+    },
+    sex: {
+      type: String,
+      required: true,
+    },
+    size: {
+      type: String,
+      required: true,
+    },
+    age: {
+      type: String,
+    },
+    medical: {
+      type: String,
+    },
+    isArchive: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    favouritesCount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    ownerContact: {
+      name: {
+        type: String
+      },
+      email: {
+        type: String
       },
       phone: {
-        type: Number,
+        type: Number
+      },
+      address: {
+        type: String,
+      }
+    },
+    profileContact: {
+      id: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
       },
     },
-    date: {
+    comments: {
+      type: String,
+    },
+    dateCreated: {
       type: Date,
       required: true,
       default: Date.now(),
-    },
-    role: {
-      type: String,
-      required: true,
     },
   },
   { collection: "listings" }
