@@ -28,6 +28,7 @@ router.post("/login", async (req, res) => {
     const payload = {
       id: user._id,
       email: user.email,
+      name: user.name,
       role: user.role,
     };
 
@@ -57,6 +58,7 @@ router.post("/refresh", (req, res) => {
     const payload = {
       id: decoded.id,
       email: decoded.email,
+      name: decoded.name,
       role: decoded.role,
     };
 
@@ -118,12 +120,13 @@ router.put("/register", async (req, res) => {
       email: req.body.email,
       hash: hash,
       name: req.body.name,
-      company: req.body.company,
+      profileType: req.body.profileType,
       contact: {
-        address: req.body.contact.address,
-        phone: req.body.contact.phone,
+        address: req.body.contact?.address,
+        phone: req.body.contact?.phone,
       },
       role: req.body.role,
+      favourites: [],
     });
 
     console.log("created user: ", createdUser);
@@ -160,15 +163,16 @@ router.patch("/user", auth, async (req, res) => {
       { email: req.body.email },
       {
         $set: {
-          email: req.body.newemail || currentUserData.email,
+          email: req.body.newEmail || currentUserData.email,
           name: req.body.name || currentUserData.name,
-          company: req.body.company || currentUserData.company,
+          profileType: req.body.profileType || currentUserData.profileType,
           contact: {
             address:
               req.body.contact?.address || currentUserData.contact.address,
             phone: req.body.contact?.phone || currentUserData.contact.phone,
           },
           role: req.body.role || currentUserData.role,
+          favourites: req.body.favourites || currentUserData.favourites,
         },
       },
       { new: true }
@@ -198,14 +202,15 @@ router.patch("/user", auth, async (req, res) => {
       { email: req.decoded.email },
       {
         $set: {
-          email: req.body.newemail || currentUserData.email,
+          email: req.body.newEmail || currentUserData.email,
           name: req.body.name || currentUserData.name,
-          company: req.body.company || currentUserData.company,
+          profileType: req.body.profileType || currentUserData.profileType,
           contact: {
             address:
               req.body.contact?.address || currentUserData.contact.address,
             phone: req.body.contact?.phone || currentUserData.contact.phone,
           },
+          favourites: req.body.favourites || currentUserData.favourites,
         },
       },
       { new: true }
@@ -238,6 +243,16 @@ router.delete("/user", auth, async (req, res) => {
     const user = await User.deleteOne({ email: req.decoded.email });
     res.json(user);
   }
+});
+
+router.post("/favourites", auth, async (req, res) => {
+  // const currentUserData = await User.findOne({ email: req.decoded.email });
+  const UserDataFavouritesUpdated = await User.findOneAndUpdate(
+    { email: req.decoded.email },
+    { $push: { favourites: req.body.newFavourite } },
+    { new: true }
+  );
+  res.json(UserDataFavouritesUpdated);
 });
 
 module.exports = router;
