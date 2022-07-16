@@ -23,6 +23,15 @@ function App() {
 
   //listing
   const [listing, setListing] = useState("");
+  const [titleInput, setTitleInput] = useState("");
+  const [petNameInput, setPetNameInput] = useState("");
+  const [speciesInput, setSpeciesInput] = useState("");
+  const [breedInput, setBreedInput] = useState("");
+  const [sexInput, setSexInput] = useState("");
+  const [sizeInput, setSizeInput] = useState("");
+  const [ageInput, setAgeInput] = useState("");
+  const [medicalInput, setMedicalInput] = useState("");
+  const [ownerNameInput, setOwnerNameInput] = useState("");
 
   return (
     <ReactContext.Provider
@@ -44,6 +53,24 @@ function App() {
         setValidEmail,
         listing,
         setListing,
+        titleInput,
+        ageInput,
+        setAgeInput,
+        sizeInput,
+        setSizeInput,
+        sexInput,
+        setSexInput,
+        breedInput,
+        setBreedInput,
+        setTitleInput,
+        petNameInput,
+        medicalInput,
+        setMedicalInput,
+        setPetNameInput,
+        speciesInput,
+        setSpeciesInput,
+        ownerNameInput,
+        setOwnerNameInput,
       }}
     >
       <div className="container">

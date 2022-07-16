@@ -30,10 +30,10 @@ router.put("/create", auth, async (req, res) => {
         isArchive: req.body.isArchive,
         favouritesCount: req.body.favouritesCount,
         ownerContact: {
-          name: req.body.ownerContact.name,
-          email: req.body.ownerContact.email,
-          phone: req.body.ownerContact.phone,
-          address: req.body.ownerContact.address,
+          name: req.body.ownerContact?.name,
+          email: req.body.ownerContact?.email,
+          phone: req.body.ownerContact?.phone,
+          address: req.body.ownerContact?.address,
         },
         profileContact: {
           // here links with payload from users /login

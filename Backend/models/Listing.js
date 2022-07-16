@@ -49,17 +49,17 @@ const ListingSchema = new mongoose.Schema(
     },
     ownerContact: {
       name: {
-        type: String
+        type: String,
       },
       email: {
-        type: String
+        type: String,
       },
       phone: {
-        type: Number
+        type: Number,
       },
       address: {
         type: String,
-      }
+      },
     },
     profileContact: {
       id: {

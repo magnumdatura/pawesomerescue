@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ReactContext from "../context/react-context";
 
 const Home = () => {
@@ -32,7 +32,10 @@ const Home = () => {
     }
   };
 
-  fetchDisplayListings("http://localhost:5001/listings/displayAll");
+  useEffect(() => {
+    fetchDisplayListings("http://localhost:5001/listings/displayAll");
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
