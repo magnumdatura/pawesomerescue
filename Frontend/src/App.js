@@ -32,6 +32,10 @@ function App() {
   const [ageInput, setAgeInput] = useState("");
   const [medicalInput, setMedicalInput] = useState("");
   const [ownerNameInput, setOwnerNameInput] = useState("");
+  const [ownerEmailInput, setOwnerEmailInput] = useState("");
+  const [ownerPhoneInput, setOwnerPhoneInput] = useState("");
+  const [ownerAddressInput, setOwnerAddressInput] = useState("");
+  const [commentsInput, setCommentsInput] = useState("");
 
   return (
     <ReactContext.Provider
@@ -71,34 +75,41 @@ function App() {
         setSpeciesInput,
         ownerNameInput,
         setOwnerNameInput,
+        ownerEmailInput,
+        setOwnerEmailInput,
+        ownerPhoneInput,
+        setOwnerPhoneInput,
+        ownerAddressInput,
+        setOwnerAddressInput,
+        commentsInput,
+        setCommentsInput,
       }}
     >
       <div className="container">
         <NavBar />
-        <main>
-          <Suspense fallback={<p>loading...</p>}>
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/home"></Redirect>
-              </Route>
-              <Route exact path="/home">
-                <Home />
-              </Route>
-              <Route path="/Form">
-                <Form />
-              </Route>
-              <Route path="/Archive">
-                <Archive />
-              </Route>
-              <Route path="/favourite">
-                <Favourite />
-              </Route>
-              <Route path="/profile">
-                <Profile />
-              </Route>
-            </Switch>
-          </Suspense>
-        </main>
+
+        <Suspense fallback={<p>loading...</p>}>
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/home"></Redirect>
+            </Route>
+            <Route exact path="/home">
+              <Home />
+            </Route>
+            <Route path="/Form">
+              <Form />
+            </Route>
+            <Route path="/Archive">
+              <Archive />
+            </Route>
+            <Route path="/favourite">
+              <Favourite />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+          </Switch>
+        </Suspense>
       </div>
     </ReactContext.Provider>
   );

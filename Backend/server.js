@@ -5,11 +5,13 @@ const cors = require("cors");
 const connectDB = require("./db/db");
 const users = require("./router/users");
 const listings = require("./router/listings");
+const bodyParser = require("body-parser");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 connectDB(process.env.MONGODB_URI);
 

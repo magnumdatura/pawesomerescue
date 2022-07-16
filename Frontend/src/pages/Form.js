@@ -16,7 +16,11 @@ const Form = () => {
       //need some help with this.
       ownerContact: {
         name: reactCtx.ownerNameInput,
+        email: reactCtx.ownerEmailInput,
+        phone: reactCtx.ownerPhoneInput,
+        address: reactCtx.ownerAddressInput,
       },
+      comments: reactCtx.commentsInput,
     });
 
     const options = {
@@ -61,6 +65,14 @@ const Form = () => {
       reactCtx.setMedicalInput(event.target.value);
     if (event.target.id === "ownerName")
       reactCtx.setOwnerNameInput(event.target.value);
+    if (event.target.id === "ownerEmail")
+      reactCtx.setOwnerEmailInput(event.target.value);
+    if (event.target.id === "ownerPhone")
+      reactCtx.setOwnerPhoneInput(event.target.value);
+    if (event.target.id === "ownerAddress")
+      reactCtx.setOwnerAddressInput(event.target.value);
+    if (event.target.id === "comments")
+      reactCtx.setCommentsInput(event.target.value);
   }
 
   function handleSubmit(event) {
@@ -77,6 +89,7 @@ const Form = () => {
     <>
       <form>
         <div>
+          <h3>Submit An Adoption!</h3>
           <input
             type="text"
             onChange={handleChange}
@@ -139,13 +152,47 @@ const Form = () => {
             placeholder="Medical Conditions"
             id="medical"
           ></input>
-          <div>Contact Details:</div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Owner's Name"
-            id="ownerName"
-          ></input>
+          <h3>Contact Details:</h3>
+          <div>
+            <input
+              type="text"
+              onChange={handleChange}
+              placeholder="Owner's Name"
+              id="ownerName"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              onChange={handleChange}
+              placeholder="Owner's Email"
+              id="ownerEmail"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              onChange={handleChange}
+              placeholder="Owner's Phone"
+              id="ownerPhone"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              onChange={handleChange}
+              placeholder="Owner's Address"
+              id="ownerAddress"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              onChange={handleChange}
+              placeholder="Comments"
+              id="comments"
+            ></input>
+          </div>
         </div>
         <div>
           <button onClick={handleSubmit}>Submit Pet!</button>

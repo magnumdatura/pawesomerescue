@@ -26,3 +26,17 @@ body {
   height: 300px;
   display: inline-block;
 }
+
+form {
+  margin: 2px;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  display: inline-block;
+}
+
+input {
+  margin: 6px;
+  width: 30%;
+}
