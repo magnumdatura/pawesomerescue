@@ -48,3 +48,18 @@ img {
   height: auto;
   max-height: 300px;
 }
+
+li {
+  list-style: none;
+  text-align: center;
+  margin: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.button {
+  align-items: center;
+  align-content: center;
+}

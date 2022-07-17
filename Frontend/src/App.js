@@ -16,6 +16,8 @@ function App() {
   //registration
   const [nameInput, setNameInput] = useState("");
   const [profileTypeInput, setProfileTypeInput] = useState("");
+  const [addressInput, setAddressInput] = useState("");
+  const [phoneInput, setPhoneInput] = useState("");
 
   //password1 for the sign up page
   //profile
@@ -44,6 +46,10 @@ function App() {
     <ReactContext.Provider
       // these are not mandatory, the "parent" can choose what data the "child" can access
       value={{
+        phoneInput,
+        setPhoneInput,
+        addressInput,
+        setAddressInput,
         profileTypeInput,
         setProfileTypeInput,
         nameInput,

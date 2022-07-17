@@ -11,6 +11,10 @@ const CreateProfile = () => {
       password1: reactCtx.passwordInput,
       name: reactCtx.nameInput,
       profileType: reactCtx.profileTypeInput,
+      contact: {
+        address: reactCtx.addressInput,
+        phone: reactCtx.phoneInput,
+      },
     });
 
     const options = {
@@ -39,6 +43,8 @@ const CreateProfile = () => {
       reactCtx.setPasswordInput(data.password);
       reactCtx.setNameInput(data.name);
       reactCtx.setProfileTypeInput(data.profiletype);
+      reactCtx.setAddressInput(data.contact?.address);
+      reactCtx.setPhoneInput(data.contact?.phone);
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -56,6 +62,9 @@ const CreateProfile = () => {
     if (event.target.id === "name") reactCtx.setNameInput(event.target.value);
     if (event.target.id === "profiletype")
       reactCtx.setProfileTypeInput(event.target.value);
+    if (event.target.id === "address")
+      reactCtx.setAddressInput(event.target.value);
+    if (event.target.id === "phone") reactCtx.setPhoneInput(event.target.value);
   }
 
   function handleRegister(event) {
@@ -68,23 +77,61 @@ const CreateProfile = () => {
       <h1>Registration Page</h1>
       <form>
         <div>
-          Email:
-          <input type="email" onChange={handleInput} id="email"></input>
+          <input
+            type="email"
+            placeholder="Required: Your Email Address"
+            onChange={handleInput}
+            id="email"
+          ></input>
         </div>
         <div>
-          Password:
-          <input type="password" onChange={handleInput} id="password"></input>
+          <input
+            type="password"
+            placeholder="Required: Alphanumeric"
+            onChange={handleInput}
+            id="password"
+          ></input>
         </div>
         <div>
-          Name:
-          <input type="text" onChange={handleInput} id="name"></input>
+          <input
+            type="text"
+            placeholder="Required: Your Name"
+            onChange={handleInput}
+            id="name"
+          ></input>
         </div>
-        <select id="profiletype" onChange={handleInput}>
-          <option value="adopter">Adopting a pet!</option>
-          <option value="poster">Posting an adoption!</option>
-        </select>
+        <div>
+          <div>
+            <input
+              type="text"
+              placeholder="Optional: Your Address"
+              onChange={handleInput}
+              id="address"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="number"
+              placeholder="Optional: Your Phone Number"
+              onChange={handleInput}
+              id="phone"
+            ></input>
+          </div>
+        </div>
+        <div>
+          <br />
+          <select id="profiletype" onChange={handleInput}>
+            <option value="">Required: Are You A Adopter? or Poster?</option>
+            <option value="adopter">Adopting a pet!</option>
+            <option value="poster">Posting an adoption!</option>
+          </select>
+        </div>
+        <br />
+        <button onClick={handleRegister} className="button">
+          REGISTER
+        </button>
       </form>
-      <button onClick={handleRegister}>REGISTER</button>
+      <div></div>
     </>
   );
 };

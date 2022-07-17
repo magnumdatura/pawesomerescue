@@ -198,6 +198,7 @@ const Profile = () => {
 
   return (
     <div className="App">
+      {/* links to the registration page */}
       <li>
         <Link to="/register">Register here!</Link>
       </li>
@@ -236,9 +237,13 @@ const Profile = () => {
                 <br />
                 name: {data.name}
                 <br />
-                company: {data.company}
-                <br />
                 date joined: {data.date}
+                <br />
+                profile type: {data.profileType}
+                <br />
+                email add: {data.email}
+                <br />
+                role: {data.role}
               </div>
             );
           })}
