@@ -45,6 +45,7 @@ const CreateProfile = () => {
       reactCtx.setProfileTypeInput(data.profiletype);
       reactCtx.setAddressInput(data.contact?.address);
       reactCtx.setPhoneInput(data.contact?.phone);
+      alert("profile created");
     } catch (err) {
       // setError(err.message);
       console.log(err);
