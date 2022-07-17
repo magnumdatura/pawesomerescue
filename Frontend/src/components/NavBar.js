@@ -13,6 +13,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
+            {/* currently only works if the role is user */}
             <NavLink to="/form" activeClassName={styles.active}>
               Submit an Adoption
             </NavLink>

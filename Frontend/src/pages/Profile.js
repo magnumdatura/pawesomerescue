@@ -81,6 +81,7 @@ const Profile = () => {
       console.log(refresh_token);
       reactCtx.setAccess(access_token);
       reactCtx.setRefresh(refresh_token);
+      alert("Logged in");
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -204,30 +205,36 @@ const Profile = () => {
       </li>
 
       <form>
-        <label>USERNAME</label>
-        <input type="email" onChange={handleInput} id="email"></input>
-        {/* <div>{emailInput}</div> */}
-        <label>PASSWORD</label>
-        <input type="password" onChange={handleInput} id="password"></input>
-        {/* <div>{passwordInput}</div> */}
-      </form>
-      <button onClick={handleLogin}>LOGIN AND FETCH THE FUCKER</button>
-      <button onClick={handleDisplay}>DISPLAY ALL USERS</button>
-
-      <br></br>
-      <form>
-        <label>SEARCH</label>
+        <div>
+          <div>
+            <label>Email:</label>
+          </div>
+          <input type="email" onChange={handleInput} id="email"></input>
+        </div>
+        <div>
+          <div>
+            <label>Password:</label>
+          </div>
+          <input type="password" onChange={handleInput} id="password"></input>
+        </div>
+        <div>
+          <button onClick={handleLogin}>Login</button>
+          <button onClick={handleDisplay}>Display Users</button>
+        </div>
+        <br />
+        <div>
+          <label>Search</label>
+        </div>
         <input
           type="text"
-          placeholder="search"
+          placeholder="search with email"
           onChange={handleInput}
           id="search"
         ></input>
+        <div>
+          <button onClick={handleSearch}>Search</button>
+        </div>
       </form>
-      <button onClick={handleSearch}>Submit the HUNT</button>
-      <p>Access: {reactCtx.access}</p>
-      <br></br>
-      <p>Refresh: {reactCtx.refresh}</p>
       <div>
         {reactCtx.displayAll &&
           reactCtx.displayAll.map((data, index) => {
