@@ -50,6 +50,9 @@ const Home = () => {
             <span>
               <div key={index} className="listing">
                 <div>
+                  <img src={data.image} />
+                </div>
+                <div>
                   <h4>{data.title}</h4>
                 </div>
                 <div>
@@ -60,6 +63,9 @@ const Home = () => {
                 </div>
                 <div>
                   <p>Breed: {data.breed}</p>
+                </div>
+                <div>
+                  <p>Comments: {data.comments}</p>
                 </div>
               </div>
             </span>
