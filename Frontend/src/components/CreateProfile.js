@@ -121,7 +121,7 @@ const CreateProfile = () => {
         <div>
           <br />
           <select id="profiletype" onChange={handleInput}>
-            <option value="">Required: Are You A Adopter? or Poster?</option>
+            <option value="">Required: What are you doing here?</option>
             <option value="adopter">Adopting a pet!</option>
             <option value="poster">Posting an adoption!</option>
           </select>
