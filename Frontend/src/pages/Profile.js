@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import ReactContext from "../context/react-context";
+import { Link } from "react-router-dom";
 
 // ways to store authorization tokens from JWT in react fetch || this covers what POSTMAN does
 // fetch ('uri', {
@@ -115,7 +116,6 @@ const Profile = () => {
     }
   };
 
-  // POST /display1 // currently does work, mapping issues
   const fetchSearch = async (url) => {
     const bod = JSON.stringify({
       email: reactCtx.searchInput,
@@ -198,6 +198,10 @@ const Profile = () => {
 
   return (
     <div className="App">
+      <li>
+        <Link to="/register">Register here!</Link>
+      </li>
+
       <form>
         <label>USERNAME</label>
         <input type="email" onChange={handleInput} id="email"></input>

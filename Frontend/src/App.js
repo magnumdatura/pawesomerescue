@@ -8,10 +8,14 @@ const Favourite = React.lazy(() => import("./pages/Favourite"));
 const Profile = React.lazy(() => import("./pages/Profile"));
 const Archive = React.lazy(() => import("./pages/Archive"));
 const Form = React.lazy(() => import("./pages/Form"));
+const CreateProfile = React.lazy(() => import("./components/CreateProfile"));
 
 function App() {
   const [access, setAccess] = useState("");
   const [refresh, setRefresh] = useState("");
+  //registration
+  const [nameInput, setNameInput] = useState("");
+  const [profileTypeInput, setProfileTypeInput] = useState("");
 
   //password1 for the sign up page
   //profile
@@ -35,12 +39,15 @@ function App() {
   const [ownerEmailInput, setOwnerEmailInput] = useState("");
   const [ownerPhoneInput, setOwnerPhoneInput] = useState("");
   const [ownerAddressInput, setOwnerAddressInput] = useState("");
-  const [commentsInput, setCommentsInput] = useState("");
 
   return (
     <ReactContext.Provider
       // these are not mandatory, the "parent" can choose what data the "child" can access
       value={{
+        profileTypeInput,
+        setProfileTypeInput,
+        nameInput,
+        setNameInput,
         access,
         setAccess,
         refresh,
@@ -81,8 +88,6 @@ function App() {
         setOwnerPhoneInput,
         ownerAddressInput,
         setOwnerAddressInput,
-        commentsInput,
-        setCommentsInput,
       }}
     >
       <div className="container">
@@ -107,6 +112,9 @@ function App() {
             </Route>
             <Route path="/profile">
               <Profile />
+            </Route>
+            <Route path="/register">
+              <CreateProfile />
             </Route>
           </Switch>
         </Suspense>

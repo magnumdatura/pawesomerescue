@@ -19,7 +19,6 @@ const Form = () => {
         phone: reactCtx.ownerPhoneInput,
         address: reactCtx.ownerAddressInput,
       },
-      comments: reactCtx.commentsInput,
     });
 
     const options = {
@@ -43,6 +42,7 @@ const Form = () => {
       const data = await res.json();
       console.log(data);
       reactCtx.setTitleInput(data);
+      window.alert("Listing created!");
     } catch (err) {
       console.log(err);
     }
@@ -69,8 +69,6 @@ const Form = () => {
       reactCtx.setOwnerPhoneInput(event.target.value);
     if (event.target.id === "ownerAddress")
       reactCtx.setOwnerAddressInput(event.target.value);
-    if (event.target.id === "comments")
-      reactCtx.setCommentsInput(event.target.value);
   }
 
   function handleSubmit(event) {
@@ -78,7 +76,6 @@ const Form = () => {
 
     if (reactCtx.validEmail) {
       submitForm("http://localhost:5001/listings/create");
-      window.alert("Listing created!");
     } else {
       window.alert(`listing can't be created`);
     }

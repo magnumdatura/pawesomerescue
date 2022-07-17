@@ -23,11 +23,9 @@ const Home = () => {
       }
 
       const data = await res.json();
-      // setData(data);
       console.log(data);
       reactCtx.setListing(data);
     } catch (err) {
-      // setError(err.message);
       console.log(err);
     }
   };
@@ -39,10 +37,6 @@ const Home = () => {
 
   return (
     <>
-      {/* <form>
-        <button onClick={handleDisplayListings}>DISPLAY ALL USERS</button>
-      </form> */}
-
       {reactCtx.listing &&
         reactCtx.listing.map((data, index) => {
           // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
@@ -50,7 +44,7 @@ const Home = () => {
             <span>
               <div key={index} className="listing">
                 <div>
-                  <img src={data.image} />
+                  <img src={data.image} alt="img" />
                 </div>
                 <div>
                   <h4>{data.title}</h4>
@@ -63,9 +57,6 @@ const Home = () => {
                 </div>
                 <div>
                   <p>Breed: {data.breed}</p>
-                </div>
-                <div>
-                  <p>Comments: {data.comments}</p>
                 </div>
               </div>
             </span>
