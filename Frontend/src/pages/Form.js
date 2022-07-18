@@ -73,12 +73,7 @@ const Form = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    if (reactCtx.validEmail) {
-      submitForm("http://localhost:5001/listings/create");
-    } else {
-      window.alert(`listing can't be created`);
-    }
+    submitForm("http://localhost:5001/listings/create");
   }
 
   return (
