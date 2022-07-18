@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactContext from "../context/react-context";
 
 const Home = () => {
   const reactCtx = useContext(ReactContext);
+  const [searchListingInput, setSearchListingInput] = useState("");
+  const [searchDisplay, setSearchDisplay] = useState("");
 
   const fetchDisplayListings = async (url) => {
     const options = {
@@ -34,6 +36,53 @@ const Home = () => {
     fetchDisplayListings("http://localhost:5001/listings/displayAll");
     // eslint-disable-next-line
   }, []);
+
+  const fetchSearchListings = async (url) => {
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + reactCtx.access,
+      },
+    };
+
+    try {
+      const res = await fetch(url, options);
+      if (res.status !== 200) {
+        throw new Error("Something went wrong.");
+      }
+
+      const data = await res.json();
+      console.log(data);
+
+      function filterByValue(array, string) {
+        return array.filter((o) => {
+          // this returns an array of values that pass 'true' in the .some test :: .some returns true/false
+          return Object.keys(o).some((k) => {
+            if (typeof o[k] === "string")
+              return o[k].toLowerCase().includes(string.toLowerCase());
+          });
+        });
+      }
+
+      const filterSearch = filterByValue(data, searchListingInput);
+      setSearchDisplay(filterSearch);
+      console.log(searchDisplay)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function handleListingSearch(event) {
+    event.preventDefault();
+    if (event.target.id === "searchInput")
+      setSearchListingInput(event.target.value);
+  }
+
+  function submitListingSearch(event) {
+    event.preventDefault();
+    fetchSearchListings("http://localhost:5001/listings/displayAll");
+  }
 
   // setInterval(
   //   fetchDisplayListings("http://localhost:5001/listings/displayAll"),
@@ -116,6 +165,15 @@ const Home = () => {
 
   return (
     <>
+      <form>
+        <input
+          type="text"
+          placeholder="Search listings"
+          id="searchInput"
+          onChange={handleListingSearch}
+        ></input>
+        <button onClick={submitListingSearch}>Search</button>
+      </form>
       {reactCtx.listing &&
         reactCtx.listing.map((data, index) => {
           // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
