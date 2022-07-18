@@ -1,6 +1,7 @@
 import React, { Suspense, useState } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import NavBar2 from "./components/NavBar2";
 import ReactContext from "./context/react-context";
 
 const Home = React.lazy(() => import("./pages/Home"));
@@ -8,6 +9,9 @@ const Favourite = React.lazy(() => import("./pages/Favourite"));
 const Profile = React.lazy(() => import("./pages/Profile"));
 const Archive = React.lazy(() => import("./pages/Archive"));
 const Form = React.lazy(() => import("./pages/Form"));
+const Dogs = React.lazy(() => import("./pages/Dogs"));
+const Cats = React.lazy(() => import("./pages/Cats"));
+const SmallAnimals = React.lazy(() => import("./pages/SmallAnimals"));
 const CreateProfile = React.lazy(() => import("./components/CreateProfile"));
 
 function App() {
@@ -98,7 +102,7 @@ function App() {
     >
       <div className="container">
         <NavBar />
-
+        <NavBar2 />
         <Suspense fallback={<p>loading...</p>}>
           <Switch>
             <Route exact path="/">
@@ -121,6 +125,15 @@ function App() {
             </Route>
             <Route path="/register">
               <CreateProfile />
+            </Route>
+            <Route path="/dogs">
+              <Dogs />
+            </Route>
+            <Route path="/cats">
+              <Cats />
+            </Route>
+            <Route path="/smallanimals">
+              <SmallAnimals />
             </Route>
           </Switch>
         </Suspense>
