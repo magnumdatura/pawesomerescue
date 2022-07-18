@@ -249,7 +249,17 @@ router.post("/favourites", auth, async (req, res) => {
   // const currentUserData = await User.findOne({ email: req.decoded.email });
   const UserDataFavouritesUpdated = await User.findOneAndUpdate(
     { email: req.decoded.email },
-    { $push: { favourites: req.body.newFavourite } },
+    { $push: { favourites: req.body.favouriteAdd } },
+    { new: true }
+  );
+  res.json(UserDataFavouritesUpdated);
+});
+
+router.delete("/favourites", auth, async (req, res) => {
+  // const currentUserData = await User.findOne({ email: req.decoded.email });
+  const UserDataFavouritesUpdated = await User.findOneAndUpdate(
+    { email: req.decoded.email },
+    { $pull: { favourites: req.body.favouriteDel } },
     { new: true }
   );
   res.json(UserDataFavouritesUpdated);

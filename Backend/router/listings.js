@@ -166,6 +166,17 @@ router.patch("/edit", auth, async (req, res) => {
   }
 });
 
+// UPDATE LISTING FAVOURITE COUNT
+router.patch("/favourite", async (req, res) => {
+  // both admin and users can update listing favourite count
+  const newListingData = await Listing.findOneAndUpdate(
+    { _id: req.body.id },
+    { $inc: { favouritesCount: +1 } },
+    { new: true }
+  );
+  res.json(newListingData);
+});
+
 // DELETE LISTING
 router.delete("/delete", auth, async (req, res) => {
   if (req.decoded.role === "admin") {
