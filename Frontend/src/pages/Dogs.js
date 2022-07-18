@@ -25,21 +25,19 @@ const Dogs = () => {
       const data = await res.json();
       console.log(data);
 
-      //working on this {NAT}
-      // let filterByValue = data.filter(function (obj) {
-      //   //loop through each object
-      //   for (key in obj) {
-      //     //check if object value contains value you are looking for
-      //     if (obj[key].includes("dog")) {
-      //       //add this object to the filtered array
-      //       return obj;
-      //     }
-      //   }
-      // });
+      function filterByValue(array, string) {
+        return array.filter((o) => {
+          return Object.keys(o).some((k) => {
+            if (typeof o[k] === "string")
+              return o[k].toLowerCase().includes(string.toLowerCase());
+          });
+        });
+      }
 
-      // console.log(filterByValue([data]));
+      const filterDogs = filterByValue(data, "dog");
+      console.log(filterDogs);
 
-      reactCtx.setDogListing(data);
+      reactCtx.setDogListing(filterDogs);
     } catch (err) {
       console.log(err);
     }
@@ -52,8 +50,8 @@ const Dogs = () => {
 
   return (
     <>
-      {reactCtx.listing &&
-        reactCtx.listing.map((data, index) => {
+      {reactCtx.dogListing &&
+        reactCtx.dogListing.map((data, index) => {
           // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
           return (
             <span>

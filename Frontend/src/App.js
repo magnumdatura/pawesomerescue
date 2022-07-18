@@ -23,6 +23,10 @@ function App() {
   const [addressInput, setAddressInput] = useState("");
   const [phoneInput, setPhoneInput] = useState("");
 
+  //filter dogs
+  const [dogListing, setDogListing] = useState("");
+  const [catListing, setCatListing] = useState("");
+
   //password1 for the sign up page
   //profile
   const [emailInput, setEmailInput] = useState("");
@@ -50,6 +54,10 @@ function App() {
     <ReactContext.Provider
       // these are not mandatory, the "parent" can choose what data the "child" can access
       value={{
+        catListing,
+        setCatListing,
+        dogListing,
+        setDogListing,
         phoneInput,
         setPhoneInput,
         addressInput,
