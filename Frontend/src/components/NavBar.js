@@ -33,6 +33,11 @@ const NavBar = () => {
               Profile
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/loginDetails" activeClassName={styles.active}>
+              Login Details
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>

@@ -70,6 +70,7 @@ const Profile = () => {
 
       if (res.status !== 200) {
         throw new Error("Something went wrong.");
+        alert("Please Register");
       }
 
       const data = await res.json();
@@ -89,37 +90,37 @@ const Profile = () => {
   };
 
   // GET /displayAll [[admin]]
-  const fetchDisplay = async (url) => {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: "Bearer " + reactCtx.access,
-      },
-    };
+  // const fetchDisplay = async (url) => {
+  //   const options = {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       authorization: "Bearer " + reactCtx.access,
+  //     },
+  //   };
 
-    try {
-      const res = await fetch(url, options);
-      console.log(res);
-      console.log(options);
+  //   try {
+  //     const res = await fetch(url, options);
+  //     console.log(res);
+  //     console.log(options);
 
-      if (res.status !== 200) {
-        throw new Error("Something went wrong.");
-      }
+  //     if (res.status !== 200) {
+  //       throw new Error("Something went wrong.");
+  //     }
 
-      const data = await res.json();
-      // setData(data);
-      console.log(data);
-      reactCtx.setDisplayAll(data);
-    } catch (err) {
-      // setError(err.message);
-      console.log(err);
-    }
-  };
+  //     const data = await res.json();
+  //     // setData(data);
+  //     console.log(data);
+  //     reactCtx.setDisplayAll(data);
+  //   } catch (err) {
+  //     // setError(err.message);
+  //     console.log(err);
+  //   }
+  // };
 
   const fetchSearch = async (url) => {
     const bod = JSON.stringify({
-      email: reactCtx.searchInput,
+      email: reactCtx.searchUserInput,
     });
 
     const options = {
@@ -157,7 +158,7 @@ const Profile = () => {
     if (event.target.id === "password")
       reactCtx.setPasswordInput(event.target.value);
     if (event.target.id === "search")
-      reactCtx.setSearchInput(event.target.value);
+      reactCtx.setSearchUserInput(event.target.value);
   }
 
   /////////////////////////////////////////
@@ -187,14 +188,9 @@ const Profile = () => {
     }
   }
 
-  function handleDisplay(event) {
-    event.preventDefault();
-    fetchDisplay("http://localhost:5001/users/users");
-  }
-
   function handleSearch(event) {
     event.preventDefault();
-    if (reactCtx.searchInput.includes("@")) {
+    if (reactCtx.searchUserInput.includes("@")) {
       fetchSearch("http://localhost:5001/users/user");
     } else {
       window.alert(`DONT BE A STALKER CALL POLIS`);
@@ -223,7 +219,7 @@ const Profile = () => {
         </div>
         <div>
           <button onClick={handleLogin}>Login</button>
-          <button onClick={handleDisplay}>Display Users</button>
+          {/* <button onClick={handleDisplay}>Display Users</button> */}
         </div>
         <br />
         <div>
@@ -240,7 +236,7 @@ const Profile = () => {
         </div>
       </form>
       <div>
-        {reactCtx.displayAll &&
+        {/* {reactCtx.displayAll &&
           reactCtx.displayAll.map((data, index) => {
             // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
             return (
@@ -257,7 +253,7 @@ const Profile = () => {
                 role: {data.role}
               </div>
             );
-          })}
+          })} */}
       </div>
     </div>
   );

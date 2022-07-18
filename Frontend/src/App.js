@@ -13,6 +13,8 @@ const Dogs = React.lazy(() => import("./pages/Dogs"));
 const Cats = React.lazy(() => import("./pages/Cats"));
 const SmallAnimals = React.lazy(() => import("./pages/SmallAnimals"));
 const CreateProfile = React.lazy(() => import("./components/CreateProfile"));
+const LoginDetails = React.lazy(() => import("./pages/LoginDetails"));
+const SearchListing = React.lazy(() => import("./pages/SearchListing"));
 
 function App() {
   const [access, setAccess] = useState("");
@@ -27,12 +29,16 @@ function App() {
   const [dogListing, setDogListing] = useState("");
   const [catListing, setCatListing] = useState("");
 
+  //search bar
+  const [searchListingInput, setSearchListingInput] = useState("");
+  const [searchDisplay, setSearchDisplay] = useState("");
+
   //password1 for the sign up page
   //profile
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [displayAll, setDisplayAll] = useState("");
-  const [searchInput, setSearchInput] = useState("");
+  const [searchUserInput, setSearchUserInput] = useState("");
   const [validEmail, setValidEmail] = useState(false);
 
   //listing
@@ -54,6 +60,10 @@ function App() {
     <ReactContext.Provider
       // these are not mandatory, the "parent" can choose what data the "child" can access
       value={{
+        searchDisplay,
+        setSearchDisplay,
+        searchListingInput,
+        setSearchListingInput,
         catListing,
         setCatListing,
         dogListing,
@@ -76,8 +86,8 @@ function App() {
         setPasswordInput,
         displayAll,
         setDisplayAll,
-        searchInput,
-        setSearchInput,
+        searchUserInput,
+        setSearchUserInput,
         validEmail,
         setValidEmail,
         listing,
@@ -131,8 +141,14 @@ function App() {
             <Route path="/profile">
               <Profile />
             </Route>
+            <Route path="/logindetails">
+              <LoginDetails />
+            </Route>
             <Route path="/register">
               <CreateProfile />
+            </Route>
+            <Route path="/searchlisting">
+              <SearchListing />
             </Route>
             <Route path="/dogs">
               <Dogs />

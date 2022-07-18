@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import ReactContext from "../context/react-context";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const reactCtx = useContext(ReactContext);
-  const [searchListingInput, setSearchListingInput] = useState("");
-  const [searchDisplay, setSearchDisplay] = useState("");
 
   const fetchDisplayListings = async (url) => {
     const options = {
@@ -53,7 +52,6 @@ const Home = () => {
       }
 
       const data = await res.json();
-      console.log(data);
 
       function filterByValue(array, string) {
         return array.filter((o) => {
@@ -65,18 +63,23 @@ const Home = () => {
         });
       }
 
-      const filterSearch = filterByValue(data, searchListingInput);
-      setSearchDisplay(filterSearch);
-      console.log(searchDisplay)
+      const filterSearch = filterByValue(data, reactCtx.searchListingInput);
+      reactCtx.setSearchDisplay(filterSearch);
+      console.log(reactCtx.searchDisplay);
     } catch (error) {
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    fetchSearchListings("http://localhost:5001/listings/displayAll");
+    // eslint-disable-next-line
+  }, [reactCtx.searchListingInput]);
+
   function handleListingSearch(event) {
     event.preventDefault();
     if (event.target.id === "searchInput")
-      setSearchListingInput(event.target.value);
+      reactCtx.setSearchListingInput(event.target.value);
   }
 
   function submitListingSearch(event) {
@@ -172,7 +175,10 @@ const Home = () => {
           id="searchInput"
           onChange={handleListingSearch}
         ></input>
-        <button onClick={submitListingSearch}>Search</button>
+        {/* WIP NAT */}
+        <Link to="/searchlisting">
+          <button onClick={submitListingSearch}>Search</button>
+        </Link>
       </form>
       {reactCtx.listing &&
         reactCtx.listing.map((data, index) => {
