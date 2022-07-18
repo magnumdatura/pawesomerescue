@@ -160,23 +160,27 @@ const Profile = () => {
       reactCtx.setSearchInput(event.target.value);
   }
 
+  /////////////////////////////////////////
+  // To deal with app crashing when going from registration --> profile, no longer using useEffect below, with the validEmail state as validator. Instead just use .includes('@') directly in the handleLogin / handleSearch checks
+  /////////////////////////////////////////
+  
   // login email validator
-  useEffect(() => {
-    // checking on keystroke
-    // validEmail.current = inputEmail.includes("@");
-    reactCtx.setValidEmail(reactCtx.emailInput.includes("@")); //if input email includes @ then it will setValidEmail as true
-    // eslint-disable-next-line
-  }, [reactCtx.emailInput]);
+  // useEffect(() => {
+  //   // checking on keystroke
+  //   // validEmail.current = inputEmail.includes("@");
+  //   reactCtx.setValidEmail(reactCtx.emailInput.includes("@")); //if input email includes @ then it will setValidEmail as true
+  //   // eslint-disable-next-line
+  // }, [reactCtx.emailInput]);
 
   // search email validator
-  useEffect(() => {
-    reactCtx.setValidEmail(reactCtx.searchInput.includes("@"));
-    // eslint-disable-next-line
-  }, [reactCtx.searchInput]);
+  // useEffect(() => {
+  //   reactCtx.setValidEmail(reactCtx.searchInput.includes("@"));
+  //   // eslint-disable-next-line
+  // }, [reactCtx.searchInput]);
 
   function handleLogin(event) {
     event.preventDefault();
-    if (reactCtx.validEmail) {
+    if (reactCtx.emailInput.includes("@")) { 
       fetchLogin("http://localhost:5001/users/login");
     } else {
       window.alert(`WRONG ADOPTION SERVER: UR STILL A LOSTBOI MOTHERFUCKER`);
@@ -190,7 +194,7 @@ const Profile = () => {
 
   function handleSearch(event) {
     event.preventDefault();
-    if (reactCtx.validEmail) {
+    if (reactCtx.searchInput.includes("@")) {
       fetchSearch("http://localhost:5001/users/user");
     } else {
       window.alert(`DONT BE A STALKER CALL POLIS`);
