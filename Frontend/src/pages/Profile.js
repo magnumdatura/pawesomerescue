@@ -163,7 +163,7 @@ const Profile = () => {
   /////////////////////////////////////////
   // To deal with app crashing when going from registration --> profile, no longer using useEffect below, with the validEmail state as validator. Instead just use .includes('@') directly in the handleLogin / handleSearch checks
   /////////////////////////////////////////
-  
+
   // login email validator
   // useEffect(() => {
   //   // checking on keystroke
@@ -180,7 +180,7 @@ const Profile = () => {
 
   function handleLogin(event) {
     event.preventDefault();
-    if (reactCtx.emailInput.includes("@")) { 
+    if (reactCtx.emailInput.includes("@")) {
       fetchLogin("http://localhost:5001/users/login");
     } else {
       window.alert(`WRONG ADOPTION SERVER: UR STILL A LOSTBOI MOTHERFUCKER`);
