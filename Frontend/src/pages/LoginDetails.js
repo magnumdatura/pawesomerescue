@@ -25,7 +25,7 @@ const LoginDetails = () => {
       const data = await res.json();
       // setData(data);
       console.log(data);
-      reactCtx.setDisplayAll(data);
+      reactCtx.setUserProfile(data);
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -58,7 +58,7 @@ const LoginDetails = () => {
       const data = await res.json();
       // setData(data);
       console.log(data);
-      reactCtx.setDisplayAll(data);
+      reactCtx.setUserProfile(data);
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -78,8 +78,8 @@ const LoginDetails = () => {
   return (
     <div className="App">
       <div>
-        {reactCtx.displayAll &&
-          reactCtx.displayAll.map((data, index) => {
+        {reactCtx.userProfile &&
+          reactCtx.userProfile.map((data, index) => {
             // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
             return (
               <span>

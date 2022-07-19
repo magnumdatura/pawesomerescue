@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import ReactContext from "../context/react-context";
 import { Link } from "react-router-dom";
 
@@ -156,7 +156,7 @@ const Home = () => {
           // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
           return (
             <span>
-              <div key={index} className="listing">
+              <div key={index} className="listing background-color: rgb(0 0 0)">
                 <div>
                   {/* <img src={require(`../images/${data.image}`)} alt="img" /> */}
                   <img src={require(`../images/charmander.png`)} alt="img" />
