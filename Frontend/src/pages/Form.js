@@ -1,33 +1,45 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ReactContext from "../context/react-context";
 
 const Form = () => {
   const reactCtx = useContext(ReactContext);
 
+  const [uploadImage, setUploadImage] = useState("");
+
   const submitForm = async (url) => {
-    const bod = JSON.stringify({
-      title: reactCtx.titleInput,
-      petName: reactCtx.petNameInput,
-      species: reactCtx.speciesInput,
-      breed: reactCtx.breedInput,
-      sex: reactCtx.sexInput,
-      size: reactCtx.sizeInput,
-      age: reactCtx.ageInput,
-      ownerContact: {
-        name: reactCtx.ownerNameInput,
-        email: reactCtx.ownerEmailInput,
-        phone: reactCtx.ownerPhoneInput,
-        address: reactCtx.ownerAddressInput,
-      },
-    });
+    const formdata = new FormData();
+    formdata.append("title", reactCtx.titleInput);
+    formdata.append("image", uploadImage);
+
+    // console.log(uploadImage);
+    // console.log(formdata);
+
+    formdata.append("petName", reactCtx.petNameInput);
+    formdata.append("species", reactCtx.speciesInput);
+    formdata.append("breed", reactCtx.breedInput);
+    formdata.append("sex", reactCtx.sexInput);
+    formdata.append("size", reactCtx.sizeInput);
+    formdata.append("age", reactCtx.ageInput);
+    formdata.append("medical", reactCtx.medicalInput);
+    formdata.append("comments", reactCtx.commentsInput);
+
+    // // owner contact not working yet
+    // formdata.append("ownerContact", JSON.stringify({
+    //   ownerContact: {
+    //     name: reactCtx.ownerNameInput,
+    //     email: reactCtx.ownerEmailInput,
+    //     phone: reactCtx.ownerPhoneInput,
+    //     address: reactCtx.ownerAddressInput,
+    //   },
+    // }));
 
     const options = {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "multipart/form-data",
         authorization: "Bearer " + reactCtx.access,
       },
-      body: bod,
+      body: formdata,
     };
 
     try {
@@ -61,6 +73,8 @@ const Form = () => {
     if (event.target.id === "age") reactCtx.setAgeInput(event.target.value);
     if (event.target.id === "medical")
       reactCtx.setMedicalInput(event.target.value);
+    if (event.target.id === "comments")
+      reactCtx.setCommentsInput(event.target.value);
     if (event.target.id === "ownerName")
       reactCtx.setOwnerNameInput(event.target.value);
     if (event.target.id === "ownerEmail")
@@ -69,6 +83,7 @@ const Form = () => {
       reactCtx.setOwnerPhoneInput(event.target.value);
     if (event.target.id === "ownerAddress")
       reactCtx.setOwnerAddressInput(event.target.value);
+    if (event.target.id === "file") setUploadImage(event.target.files[0]);
   }
 
   function handleSubmit(event) {
@@ -78,7 +93,7 @@ const Form = () => {
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
           <h3 className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2">
             Submit An Adoption!
@@ -225,6 +240,8 @@ const Form = () => {
               Cover Picture:
               <input
                 type="file"
+                accept=".png, .jpg, .jpeg"
+                name="image"
                 onChange={handleChange}
                 placeholder="image"
                 id="file"
