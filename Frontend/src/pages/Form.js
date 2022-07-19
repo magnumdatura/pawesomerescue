@@ -80,113 +80,166 @@ const Form = () => {
     <>
       <form>
         <div>
-          <h3>Submit An Adoption!</h3>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Title of Listing"
-            id="title"
-          ></input>
+          <h3 className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2">
+            Submit An Adoption!
+          </h3>
         </div>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Pet Name"
-            id="petName"
-          ></input>
+        <div className="grid grid-cols-6 gap-2">
+          <span className="col-start-1 col-end-4">
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Title of Listing"
+                id="title"
+                className="mx-auto m-2 w-2/3 block w-100 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Pet Name"
+                id="petName"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Species"
+                id="species"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Breed"
+                id="breed"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Sex"
+                id="sex"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Size"
+                id="size"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Age of Pet"
+                id="age"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Medical Conditions"
+                id="medical"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Comments"
+                id="comments"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+          </span>
+          <span className="col-end-7 col-span-3">
+            <h3 className="text-center mx-auto m-2 w-1/3 block w-50 px-3">
+              Contact Details:
+            </h3>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Owner's Name"
+                id="ownerName"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Owner's Email"
+                id="ownerEmail"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Owner's Phone"
+                id="ownerPhone"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Owner's Address"
+                id="ownerAddress"
+                className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2">
+              Cover Picture:
+              <input
+                type="file"
+                onChange={handleChange}
+                placeholder="image"
+                id="file"
+              ></input>
+            </div>
+          </span>
         </div>
+
         <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Species"
-            id="species"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Breed"
-            id="breed"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Sex"
-            id="sex"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Size"
-            id="size"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Age of Pet"
-            id="age"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Medical Conditions"
-            id="medical"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Comments"
-            id="comments"
-          ></input>
-        </div>
-        <h3>Contact Details:</h3>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Owner's Name"
-            id="ownerName"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Owner's Email"
-            id="ownerEmail"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Owner's Phone"
-            id="ownerPhone"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Owner's Address"
-            id="ownerAddress"
-          ></input>
-        </div>
-        <div>
-          <button onClick={handleSubmit}>Submit Pet!</button>
+          <button
+            onClick={handleSubmit}
+            className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+          >
+            Submit Pet!
+          </button>
         </div>
       </form>
     </>

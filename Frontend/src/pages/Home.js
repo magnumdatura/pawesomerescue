@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import ReactContext from "../context/react-context";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   const reactCtx = useContext(ReactContext);
 
-    // combined displayAll + search listings
+  // combined displayAll + search listings
   const fetchListings = async (url) => {
     const options = {
       method: "GET",
@@ -22,8 +22,8 @@ const Home = () => {
       }
 
       const data = await res.json();
-      console.log(data)
-        // SEARCH filter
+      console.log(data);
+      // SEARCH filter
       function filterByValue(array, string) {
         return array.filter((o) => {
           // .filter will return array of the values that passed .some (boolean) test
@@ -156,7 +156,7 @@ const Home = () => {
           // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
           return (
             <span>
-              <div key={index} className="listing">
+              <div key={index} className="listing background-color: rgb(0 0 0)">
                 <div>
                   <img src={data.image} alt="img" />
                 </div>
