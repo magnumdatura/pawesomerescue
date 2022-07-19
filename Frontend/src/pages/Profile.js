@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import ReactContext from "../context/react-context";
 import { Link } from "react-router-dom";
 
@@ -69,8 +69,8 @@ const Profile = () => {
       console.log(options);
 
       if (res.status !== 200) {
+        window.alert("Please Register");
         throw new Error("Something went wrong.");
-        alert("Please Register");
       }
 
       const data = await res.json();
