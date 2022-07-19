@@ -3,9 +3,10 @@ import ReactContext from "../context/react-context";
 
 const Favourite = () => {
   const reactCtx = useContext(ReactContext);
+
   const userProfile = reactCtx.userProfile;
   console.log(userProfile);
-  const favIDArr = userProfile[0].favourites;
+  const favIDArr = userProfile[0]?.favourites;
   console.log(favIDArr);
   const [userFavourites, setUserFavourites] = useState([]);
 
@@ -48,7 +49,7 @@ const Favourite = () => {
           });
         });
       }
-
+      console.log(favIDArr);
       const filterFavourites = favIDArr.map((id, index) => {
         return filterByValue(data, id);
       });
@@ -69,12 +70,20 @@ const Favourite = () => {
 
   return (
     <div>
-      {userFavourites && userFavourites.map((item) => {
-        return <div>
-          <p>Pet Name: {item[0].petName}</p>
-          <p>Pet Age: {item[0].age}</p>
-          </div>;
-      })}
+      {userFavourites == "" ? (
+        <div>
+          <p>Log in to view your favourites!</p>
+        </div>
+      ) : (
+        userFavourites.map((item) => {
+          return (
+            <div>
+              <p>Pet Name: {item[0].petName}</p>
+              <p>Pet Age: {item[0].age}</p>
+            </div>
+          );
+        })
+      )}
     </div>
   );
 };

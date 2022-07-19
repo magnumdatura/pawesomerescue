@@ -35,6 +35,8 @@ function App() {
   // login details
   const [userProfile, setUserProfile] = useState("");
 
+  const [rerouteLogin, setRerouteLogin] = useState("false");
+
   //password1 for the sign up page
   //profile
   const [emailInput, setEmailInput] = useState("");
@@ -58,10 +60,86 @@ function App() {
   const [ownerPhoneInput, setOwnerPhoneInput] = useState("");
   const [ownerAddressInput, setOwnerAddressInput] = useState("");
 
+  const updateListingFavouriteCount = async (url, listingId) => {
+    const bod = JSON.stringify({ id: listingId });
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + access,
+      },
+      body: bod,
+    };
+
+    try {
+      const res = await fetch(url, options);
+      console.log(res);
+      console.log(options);
+
+      if (res.status !== 200) {
+        throw new Error("Something went wrong.");
+      }
+
+      const data = await res.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateProfileFavouritesArray = async (url, listingId) => {
+    const bod = JSON.stringify({ favouriteAdd: listingId });
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + access,
+      },
+      body: bod,
+    };
+
+    try {
+      const res = await fetch(url, options);
+      console.log(res);
+      console.log(options);
+
+      if (res.status !== 200) {
+        throw new Error("Something went wrong.");
+      }
+
+      const data = await res.json();
+      console.log(data);
+      window.alert("Listing favourited!");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  function addToFavourites(event) {
+    event.preventDefault();
+    console.log(event.target.id);
+
+    // go to listing and plus one to favourite count
+    updateListingFavouriteCount(
+      "http://localhost:5001/listings/favourite",
+      event.target.id
+    );
+
+    // go to profile and add listing ID to profile favourites array
+    updateProfileFavouritesArray(
+      "http://localhost:5001/users/favourites",
+      event.target.id
+    );
+  }
+
   return (
     <ReactContext.Provider
       // these are not mandatory, the "parent" can choose what data the "child" can access
       value={{
+        rerouteLogin,
+        setRerouteLogin,
         userProfile,
         setUserProfile,
         searchListingInput,
@@ -118,6 +196,7 @@ function App() {
         setOwnerPhoneInput,
         ownerAddressInput,
         setOwnerAddressInput,
+        addToFavourites,
       }}
     >
       <div className="container">

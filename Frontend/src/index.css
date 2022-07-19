@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.container {
+  max-width: 100%;
+}
+
 html {
   font-family: "Oxygen", sans-serif;
 }
@@ -19,14 +23,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.listing {
-  width: 200px;
-  height: 300px;
-  display: inline-block;
-  margin: 5px;
-  padding-left: 10px;
 }
 
 img {
