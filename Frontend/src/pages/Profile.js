@@ -200,41 +200,61 @@ const Profile = () => {
   return (
     <div className="App">
       {/* links to the registration page */}
-      <li>
-        <Link to="/register">Register here!</Link>
-      </li>
 
       <form>
         <div>
           <div>
-            <label>Email:</label>
+            <label className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2">
+              Email
+            </label>
           </div>
-          <input type="email" onChange={handleInput} id="email"></input>
+          <input
+            type="email"
+            onChange={handleInput}
+            id="email"
+            className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+            focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+          ></input>
         </div>
         <div>
           <div>
-            <label>Password:</label>
+            <label className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2">
+              Password
+            </label>
           </div>
-          <input type="password" onChange={handleInput} id="password"></input>
+          <input
+            type="password"
+            onChange={handleInput}
+            id="password"
+            className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+            focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+          ></input>
         </div>
-        <div>
-          <button onClick={handleLogin}>Login</button>
-          {/* <button onClick={handleDisplay}>Display Users</button> */}
-        </div>
-        <br />
-        <div>
-          <label>Search</label>
-        </div>
-        <input
-          type="text"
-          placeholder="search with email"
-          onChange={handleInput}
-          id="search"
-        ></input>
-        <div>
-          <button onClick={handleSearch}>Search</button>
+        <div className="w-full mt-2 mb-2 py-2 text-center">
+          <button
+            onClick={handleLogin}
+            className="inline-block mx-auto mr-2 w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+          >
+            Login
+          </button>
+          <button className="inline-block mx-auto w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75">
+            <Link to="/register">Register</Link>
+          </button>
         </div>
       </form>
+      {/* <div>
+        <label>Search</label>
+      </div>
+      <input
+        type="text"
+        placeholder="search with email"
+        onChange={handleInput}
+        id="search"
+      ></input>
+      <div>
+        <button onClick={handleSearch}>Search</button>
+      </div> */}
+
       <div>
         {/* {reactCtx.displayAll &&
           reactCtx.displayAll.map((data, index) => {

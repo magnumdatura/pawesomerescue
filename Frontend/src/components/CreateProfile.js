@@ -83,7 +83,7 @@ const CreateProfile = () => {
             placeholder="Required: Your Email Address"
             onChange={handleInput}
             id="email"
-            className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-2 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+            className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
             focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
           ></input>
         </div>
@@ -93,7 +93,7 @@ const CreateProfile = () => {
             placeholder="Required: Alphanumeric"
             onChange={handleInput}
             id="password"
-            className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-2 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+            className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
             focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
           ></input>
         </div>
@@ -103,7 +103,7 @@ const CreateProfile = () => {
             placeholder="Required: Your Name"
             onChange={handleInput}
             id="name"
-            className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-2 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+            className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
             focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
           ></input>
         </div>
@@ -114,7 +114,7 @@ const CreateProfile = () => {
               placeholder="Optional: Your Address"
               onChange={handleInput}
               id="address"
-              className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-2 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
             ></input>
           </div>
@@ -124,7 +124,7 @@ const CreateProfile = () => {
               placeholder="Optional: Your Phone Number"
               onChange={handleInput}
               id="phone"
-              className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-2 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
             ></input>
           </div>
@@ -133,7 +133,7 @@ const CreateProfile = () => {
           <select
             id="profiletype"
             onChange={handleInput}
-            className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-2 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+            className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
             focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
           >
             <option value="">Required: What are you doing here?</option>
@@ -141,12 +141,14 @@ const CreateProfile = () => {
             <option value="poster">Posting an adoption!</option>
           </select>
         </div>
-        <button
-          onClick={handleRegister}
-          className="mx-auto block w-50 px-3 mx-1 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
-        >
-          REGISTER
-        </button>
+        <div>
+          <button
+            onClick={handleRegister}
+            className="mx-auto block w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+          >
+            REGISTER
+          </button>
+        </div>
       </form>
       <div></div>
     </>
