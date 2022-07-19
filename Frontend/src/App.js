@@ -32,6 +32,9 @@ function App() {
   //search bar
   const [searchListingInput, setSearchListingInput] = useState("");
 
+  // login details
+  const [userProfile, setUserProfile] = useState("");
+
   //password1 for the sign up page
   //profile
   const [emailInput, setEmailInput] = useState("");
@@ -59,6 +62,8 @@ function App() {
     <ReactContext.Provider
       // these are not mandatory, the "parent" can choose what data the "child" can access
       value={{
+        userProfile,
+        setUserProfile,
         searchListingInput,
         setSearchListingInput,
         catListing,
