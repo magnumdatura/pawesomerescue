@@ -105,7 +105,11 @@ const Home = () => {
                 </p>
               </div>
               <div>
-                <button id={data._id} onClick={reactCtx.addToFavourites}>
+                <button
+                  id={data._id}
+                  onClick={reactCtx.addToFavourites}
+                  className="text-center mx-auto block w-50 px-3 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+                >
                   Favourite
                 </button>
               </div>
