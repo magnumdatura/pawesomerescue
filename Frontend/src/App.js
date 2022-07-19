@@ -6,14 +6,14 @@ import ReactContext from "./context/react-context";
 
 const Home = React.lazy(() => import("./pages/Home"));
 const Favourite = React.lazy(() => import("./pages/Favourite"));
-const Profile = React.lazy(() => import("./pages/Profile"));
+const Login = React.lazy(() => import("./pages/Login"));
 const Archive = React.lazy(() => import("./pages/Archive"));
 const Form = React.lazy(() => import("./pages/Form"));
 const Dogs = React.lazy(() => import("./pages/Dogs"));
 const Cats = React.lazy(() => import("./pages/Cats"));
 const SmallAnimals = React.lazy(() => import("./pages/SmallAnimals"));
 const CreateProfile = React.lazy(() => import("./components/CreateProfile"));
-const LoginDetails = React.lazy(() => import("./pages/LoginDetails"));
+const Profile = React.lazy(() => import("./pages/Profile"));
 const SearchListing = React.lazy(() => import("./pages/SearchListing"));
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
   // login details
   const [userProfile, setUserProfile] = useState("");
 
-  const [rerouteLogin, setRerouteLogin] = useState("false");
+  const [loginState, setLoginState] = useState(false);
 
   //password1 for the sign up page
   //profile
@@ -138,8 +138,8 @@ function App() {
     <ReactContext.Provider
       // these are not mandatory, the "parent" can choose what data the "child" can access
       value={{
-        rerouteLogin,
-        setRerouteLogin,
+        loginState,
+        setLoginState,
         userProfile,
         setUserProfile,
         searchListingInput,
@@ -219,11 +219,11 @@ function App() {
             <Route path="/favourite">
               <Favourite />
             </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
             <Route path="/profile">
               <Profile />
-            </Route>
-            <Route path="/logindetails">
-              <LoginDetails />
             </Route>
             <Route path="/register">
               <CreateProfile />
