@@ -152,6 +152,15 @@ const Form = () => {
             id="comments"
           ></input>
         </div>
+        <div>
+          Image:
+          <input
+            type="file"
+            onChange={handleChange}
+            placeholder="image"
+            id="file"
+          ></input>
+        </div>
         <h3>Contact Details:</h3>
         <div>
           <input
