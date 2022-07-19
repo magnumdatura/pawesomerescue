@@ -9,6 +9,7 @@
 
 .navbar ul {
   height: 100%;
+  width: 100%;
   list-style: none;
   display: flex;
   align-items: center;

@@ -54,25 +54,37 @@ const Dogs = () => {
         reactCtx.dogListing.map((data, index) => {
           // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
           return (
-            <span>
-              <div key={index} className="listing">
-                <div>
-                  <img src={data.image} alt="img" />
-                </div>
-                <div>
-                  <h4>{data.title}</h4>
-                </div>
-                <div>
-                  <p>Pet Name: {data.petName}</p>
-                </div>
-                <div>
-                  <p>Species: {data.species}</p>
-                </div>
-                <div>
-                  <p>Breed: {data.breed}</p>
-                </div>
+            <div
+              key={index}
+              className="ml-4 my-2 mx-3 pl-2 w-64 h-96 inline-block m-2 p-2 rounded-lg shadow-lg"
+            >
+              <div>
+                {/* <img src={require(`../images/${data.image}`)} alt="img" /> */}
+                <img src={require(`../images/charmander.png`)} alt="img" />
               </div>
-            </span>
+              <div>
+                <p className="text-xl">{data.title}</p>
+              </div>
+              <div>
+                <p className="text-m">Pet Name: {data.petName}</p>
+              </div>
+              <div>
+                <p className="text-m">Species: {data.species}</p>
+              </div>
+              <div>
+                <p className="text-m">Breed: {data.breed}</p>
+              </div>
+              <div>
+                <p className="text-m">
+                  Favourite Count: {data.favouritesCount}
+                </p>
+              </div>
+              <div>
+                <button id={data._id} onClick={reactCtx.addToFavourites}>
+                  Favourite
+                </button>
+              </div>
+            </div>
           );
         })}
     </>
