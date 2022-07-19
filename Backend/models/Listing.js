@@ -6,30 +6,30 @@ const ListingSchema = new mongoose.Schema(
       type: String,
     },
     image: {
-      data: Buffer, // how to store our images **
+      // data: Buffer, // how to store our images **
       type: String,
       // required: true,
       // unique: true,
     },
     petName: {
       type: String,
-      required: true,
+      // required: true,
     },
     species: {
       type: String,
-      required: true,
+      // required: true,
     },
     breed: {
       type: String,
-      required: true,
+      // required: true,
     },
     sex: {
       type: String,
-      required: true,
+      // required: true,
     },
     size: {
       type: String,
-      required: true,
+      // required: true,
     },
     age: {
       type: String,

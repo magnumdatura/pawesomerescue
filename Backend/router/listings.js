@@ -1,11 +1,13 @@
 require("dotenv").config();
 
 const express = require("express");
+const multer = require("multer");
 const { body, validationResult } = require("express-validator");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
+const path = require("path");
 
 const Listing = require("../models/Listing");
 const auth = require("../middleware/auth");
@@ -13,13 +15,33 @@ const auth = require("../middleware/auth");
 const selectParams =
   "title image petName species breed sex size age medical isArchive favouritesCount ownerContact profileContact dateCreated"; // currently set to all params
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../Frontend/src/images");
+  },
+  filename: function (req, file, cb) {
+    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
+  if (allowedFileTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+let upload = multer({ storage, fileFilter });
+
 // CREATE LISTING
-router.put("/create", auth, async (req, res) => {
+router.put("/create", upload.single("image"), auth, async (req, res) => {
   try {
     if (req.decoded.role === "user") {
       const createdListing = await Listing.create({
         title: req.body.title,
-        image: req.body.image,
+        image: req.file?.filename,
         petName: req.body.petName,
         species: req.body.species,
         breed: req.body.breed,

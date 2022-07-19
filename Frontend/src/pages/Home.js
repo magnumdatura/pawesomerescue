@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const reactCtx = useContext(ReactContext);
 
-    // combined displayAll + search listings
+  // combined displayAll + search listings
   const fetchListings = async (url) => {
     const options = {
       method: "GET",
@@ -22,8 +22,8 @@ const Home = () => {
       }
 
       const data = await res.json();
-      console.log(data)
-        // SEARCH filter
+      console.log(data);
+      // SEARCH filter
       function filterByValue(array, string) {
         return array.filter((o) => {
           // .filter will return array of the values that passed .some (boolean) test
@@ -158,7 +158,8 @@ const Home = () => {
             <span>
               <div key={index} className="listing">
                 <div>
-                  <img src={data.image} alt="img" />
+                  {/* <img src={require(`../images/${data.image}`)} alt="img" /> */}
+                  <img src={require(`../images/charmander.png`)} alt="img" />
                 </div>
                 <div>
                   <h4>{data.title}</h4>
