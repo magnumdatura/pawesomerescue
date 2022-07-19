@@ -69,7 +69,7 @@ const Favourite = () => {
 
   return (
     <div>
-      {userFavourites.map((item) => {
+      {userFavourites && userFavourites.map((item) => {
         return <div>
           <p>Pet Name: {item[0].petName}</p>
           <p>Pet Age: {item[0].age}</p>

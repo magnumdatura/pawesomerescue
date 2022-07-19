@@ -82,7 +82,8 @@ const Profile = () => {
       console.log(refresh_token);
       reactCtx.setAccess(access_token);
       reactCtx.setRefresh(refresh_token);
-      alert("Logged in");
+      reactCtx.setRerouteLogin(true);
+      // alert("Logged in");
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -235,7 +236,7 @@ const Profile = () => {
             onClick={handleLogin}
             className="inline-block mx-auto mr-2 w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
           >
-            Login
+            <Link to="/logindetails">Login</Link>
           </button>
           <button className="inline-block mx-auto w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75">
             <Link to="/register">Register</Link>

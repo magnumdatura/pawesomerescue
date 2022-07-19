@@ -73,7 +73,7 @@ const LoginDetails = () => {
 
   useEffect(() => {
     fetchDisplay("http://localhost:5001/users/users"); // eslint-disable-next-line
-  }, []);
+  }, [reactCtx.rerouteLogin]);
 
   return (
     <div className="App">
