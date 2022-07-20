@@ -56,11 +56,19 @@ const SmallAnimals = () => {
           return (
             <div
               key={index}
-              className="ml-4 my-2 mx-3 pl-2 w-64 h-96 inline-block m-2 p-2 rounded-lg shadow-lg"
+              className="ml-4 my-2 mx-3 pl-2 w-64 max-h-96 inline-block m-2 p-2 rounded-lg shadow-lg"
             >
               <div>
-                {/* <img src={require(`../images/${data.image}`)} alt="img" /> */}
-                <img src={require(`../images/charmander.png`)} alt="img" />
+                <img
+                  src={require(`../images/${data.image}`)}
+                  alt="img"
+                  className="mx-auto max-h-48 w-auto"
+                />
+                {/* <img
+                src={require(`../images/charmander.png`)}
+                alt="img"
+                className="mx-auto max-h-48 w-auto"
+              /> */}
               </div>
               <div>
                 <p className="text-xl">{data.title}</p>
@@ -80,9 +88,25 @@ const SmallAnimals = () => {
                 </p>
               </div>
               <div>
-                <button id={data._id} onClick={reactCtx.addToFavourites}>
+                <button
+                  id={data._id}
+                  onClick={reactCtx.addToFavourites}
+                  className="text-center mx-auto inline-block w-50 px-3 ml-4 text-white font-semibold button-85"
+                >
                   Favourite
                 </button>
+
+                {reactCtx.userRole == "admin" ? (
+                  <button
+                    id={data._id}
+                    onClick={reactCtx.addToArchives}
+                    className="text-center mx-auto inline-block w-50 px-3 mx-6 text-white font-semibold button-85"
+                  >
+                    Archive
+                  </button>
+                ) : (
+                  <div></div>
+                )}
               </div>
             </div>
           );

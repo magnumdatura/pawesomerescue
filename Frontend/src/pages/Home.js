@@ -93,11 +93,15 @@ const Home = () => {
           return (
             <div
               key={index}
-              className="ml-4 my-2 mx-3 pl-2 w-64 h-96 inline-block m-2 p-2 rounded-lg shadow-lg"
+              className="ml-4 my-2 mx-3 pl-2 w-64 max-h-96 inline-block m-2 p-2 rounded-lg shadow-lg"
             >
               <div>
-                {/* <img src={require(`../images/${data.image}`)} alt="img" /> */}
-                <img src={require(`../images/charmander.png`)} alt="img" />
+                <img
+                  src={require(`../images/${data.image}`)}
+                  alt="img"
+                  className="mx-auto max-h-48 w-auto"
+                />
+                {/* <img src={require(`../images/charmander.png`)} alt="img" /> */}
               </div>
               <div>
                 <p className="text-xl">{data.title}</p>
