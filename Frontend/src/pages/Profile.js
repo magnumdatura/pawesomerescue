@@ -1,45 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactContext from "../context/react-context";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
   const reactCtx = useContext(ReactContext);
 
-  // const fetchDisplay = async (url) => {
-  //   const options = {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       authorization: "Bearer " + reactCtx.access,
-  //     },
-  //   };
+  const [profileEdit, setProfileEdit] = useState(false);
 
-  //   try {
-  //     const res = await fetch(url, options);
-  //     console.log(res);
-  //     console.log(options);
-
-  //     if (res.status !== 200) {
-  //       throw new Error("Something went wrong.");
-  //     }
-
-  //     const data = await res.json();
-  //     // setData(data);
-  //     console.log(data);
-  //     reactCtx.setUserProfile(data);
-  //     console.log(reactCtx.userProfile)
-
-  //     // THIS NEEDS TO CHANGE IMMEDIATELY WHEN AVAILABLE
-  //     if (data.length > 1) {
-  //       reactCtx.setUserRole("admin");
-  //       console.log(reactCtx.userRole);
-  //     }
-  //   } catch (err) {
-  //     // setError(err.message);
-  //     console.log(err);
-  //   }
-  // };
-  
   const fetchProfileDelete = async (url) => {
     const bod = JSON.stringify({
       email: reactCtx.EmailInput,
@@ -73,19 +40,188 @@ const Profile = () => {
       console.log(err);
     }
   };
-  
+
   function handleProfileDelete(event) {
     event.preventDefault();
     if (event.target.id === "email") reactCtx.setEmailInput(event.target.value);
     fetchProfileDelete("http://localhost:5001/users/user");
   }
 
+  function handleProfileEdit(event) {
+    event.preventDefault();
+    setProfileEdit(true);
+
+    // call profile and save data into states
+    if (reactCtx.userRole === "admin") {
+    }
+
+    if (reactCtx.userRole === "user") {
+      reactCtx.setEmailInput(reactCtx.userProfile[0].email);
+      reactCtx.setPasswordInput("");
+      reactCtx.setNameInput(reactCtx.userProfile[0].name);
+      reactCtx.setProfileTypeInput(reactCtx.userProfile[0].profileType);
+      reactCtx.setAddressInput(reactCtx.userProfile[0].contact.address);
+      reactCtx.setPhoneInput(reactCtx.userProfile[0].contact.phone);
+    }
+  }
+
+  const fetchProfileUpdate = async (url) => {
+    const bod = JSON.stringify({
+      email: reactCtx.emailInput,
+      newpassword: reactCtx.passwordInput,
+      name: reactCtx.nameInput,
+      profileType: reactCtx.profileTypeInput,
+      contact: {
+        address: reactCtx.addressInput,
+        phone: reactCtx.phoneInput,
+      },
+    });
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + reactCtx.access,
+      },
+      body: bod,
+    };
+
+    try {
+      const res = await fetch(url, options);
+      console.log(res);
+      console.log(options);
+
+      if (res.status !== 200) {
+        throw new Error("Something went wrong.");
+      }
+
+      const data = await res.json();
+      console.log(data);
+      alert("profile updated");
+      setProfileEdit(false);
+
+      reactCtx.refreshState
+        ? reactCtx.setRefreshState(false)
+        : reactCtx.setRefreshState(true);
+    } catch (err) {
+      // setError(err.message);
+      console.log(err);
+    }
+  };
+
+  function handleInput(event) {
+    event.preventDefault();
+    // console.log(event.target.id);
+    if (event.target.id === "email") reactCtx.setEmailInput(event.target.value);
+    if (event.target.id === "password")
+      reactCtx.setPasswordInput(event.target.value);
+    // if (event.target.id === "password1")
+    //   reactCtx.setConfirmPassword(event.target.value);
+    if (event.target.id === "name") reactCtx.setNameInput(event.target.value);
+    if (event.target.id === "profiletype")
+      reactCtx.setProfileTypeInput(event.target.value);
+    if (event.target.id === "address")
+      reactCtx.setAddressInput(event.target.value);
+    if (event.target.id === "phone") reactCtx.setPhoneInput(event.target.value);
+  }
+
+  function handleUpdate(event) {
+    event.preventDefault();
+    fetchProfileUpdate("http://localhost:5001/users/user");
+  }
+
   useEffect(() => {
     reactCtx.fetchDisplay("http://localhost:5001/users/users"); // eslint-disable-next-line
-  }, [reactCtx.loginState]);
+  }, [reactCtx.loginState, reactCtx.refreshState]);
 
   return (
     <div className="App">
+      {profileEdit ? (
+        <div>
+          <form>
+            <div className="justify-center">
+              <input
+                type="email"
+                placeholder="Required: Your Email Address"
+                onChange={handleInput}
+                id="email"
+                value={reactCtx.emailInput}
+                className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 
+                focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Required: Alphanumeric"
+                onChange={handleInput}
+                id="password"
+                value={reactCtx.passwordInput}
+                className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 
+                focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Required: Your Name"
+                onChange={handleInput}
+                id="name"
+                value={reactCtx.nameInput}
+                className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+            focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              ></input>
+            </div>
+            <div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Optional: Your Address"
+                  onChange={handleInput}
+                  id="address"
+                  value={reactCtx.addressInput}
+                  className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+                ></input>
+              </div>
+              <div>
+                <input
+                  type="number"
+                  placeholder="Optional: Your Phone Number"
+                  onChange={handleInput}
+                  id="phone"
+                  value={reactCtx.phoneInput}
+                  className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+                ></input>
+              </div>
+            </div>
+            <div>
+              <select
+                id="profiletype"
+                onChange={handleInput}
+                value={reactCtx.profileTypeInput}
+                className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
+            focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+              >
+                <option value="">Required: What are you doing here?</option>
+                <option value="adopter">Adopting a pet!</option>
+                <option value="poster">Posting an adoption!</option>
+              </select>
+            </div>
+            <div>
+              <button
+                onClick={handleUpdate}
+                className="mx-auto block w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      ) : (
+        <></>
+      )}
       <div>
         {reactCtx.userProfile &&
           reactCtx.userProfile.map((data, index) => {
@@ -126,6 +262,15 @@ const Profile = () => {
                     className="text-center mx-auto block w-50 m-1 px-3 text-white font-semibold button-85"
                   >
                     <Link to="/home">Delete</Link>
+                  </button>
+                </div>
+                <div>
+                  <button
+                    id={data._id}
+                    onClick={handleProfileEdit}
+                    className="text-center mx-auto block w-50 m-1 px-3 text-white font-semibold button-85"
+                  >
+                    Edit
                   </button>
                 </div>
               </div>

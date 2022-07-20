@@ -95,6 +95,11 @@ function App() {
         setUserRole("admin");
         console.log(userRole);
       }
+
+      if (data.length == 1) {
+        setUserRole("user");
+        console.log(userRole);
+      }
     } catch (err) {
       // setError(err.message);
       console.log(err);
