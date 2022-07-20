@@ -108,24 +108,23 @@ const Home = () => {
                 <button
                   id={data._id}
                   onClick={reactCtx.addToFavourites}
-                  className="text-center mx-auto block w-50 px-3 text-white font-semibold button-85"
+                  className="text-center mx-auto inline-block w-50 px-3 ml-4 text-white font-semibold button-85"
                 >
                   Favourite
                 </button>
-              </div>
-              {reactCtx.userRole == "admin" ? (
-                <div>
+
+                {reactCtx.userRole == "admin" ? (
                   <button
                     id={data._id}
                     onClick={reactCtx.addToArchives}
-                    className="text-center mx-auto block w-50 px-3 text-white font-semibold button-85"
+                    className="text-center mx-auto inline-block w-50 px-3 mx-6 text-white font-semibold button-85"
                   >
                     Archive
                   </button>
-                </div>
-              ) : (
-                <div></div>
-              )}
+                ) : (
+                  <div></div>
+                )}
+              </div>
             </div>
           );
         })}
