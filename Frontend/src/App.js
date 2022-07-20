@@ -14,7 +14,6 @@ const Cats = React.lazy(() => import("./pages/Cats"));
 const SmallAnimals = React.lazy(() => import("./pages/SmallAnimals"));
 const CreateProfile = React.lazy(() => import("./components/CreateProfile"));
 const Profile = React.lazy(() => import("./pages/Profile"));
-const SearchListing = React.lazy(() => import("./pages/SearchListing"));
 
 function App() {
   const [access, setAccess] = useState("");
@@ -39,7 +38,7 @@ function App() {
   const [userRole, setUserRole] = useState("");
 
   // refresh pages
-  const [refreshState, setRefreshState] = useState(false)
+  const [refreshState, setRefreshState] = useState(false);
 
   //password1 for the sign up page
   //profile
@@ -138,7 +137,7 @@ function App() {
       event.target.id
     );
 
-    refreshState ? setRefreshState(false) : setRefreshState(true)
+    refreshState ? setRefreshState(false) : setRefreshState(true);
   }
 
   const updateListingArchive = async (url, listingId) => {
@@ -176,7 +175,7 @@ function App() {
       event.target.id
     );
 
-    refreshState ? setRefreshState(false) : setRefreshState(true)
+    refreshState ? setRefreshState(false) : setRefreshState(true);
   }
 
   return (
@@ -279,9 +278,6 @@ function App() {
             </Route>
             <Route path="/register">
               <CreateProfile />
-            </Route>
-            <Route path="/searchlisting">
-              <SearchListing />
             </Route>
             <Route path="/dogs">
               <Dogs />
