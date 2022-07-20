@@ -36,6 +36,7 @@ function App() {
   const [userProfile, setUserProfile] = useState("");
 
   const [loginState, setLoginState] = useState(false);
+  const [userRole, setUserRole] = useState("");
 
   //password1 for the sign up page
   //profile
@@ -134,10 +135,48 @@ function App() {
     );
   }
 
+  const updateListingArchive = async (url, listingId) => {
+    const bod = JSON.stringify({ id: listingId });
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + access,
+      },
+      body: bod,
+    };
+
+    try {
+      const res = await fetch(url, options);
+
+      if (res.status !== 200) {
+        throw new Error("Something went wrong.");
+      }
+
+      const data = await res.json();
+      console.log(data);
+      console.log("Added to archives!");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  function addToArchives(event) {
+    event.preventDefault();
+
+    updateListingArchive(
+      "http://localhost:5001/listings/archive",
+      event.target.id
+    );
+  }
+
   return (
     <ReactContext.Provider
       // these are not mandatory, the "parent" can choose what data the "child" can access
       value={{
+        userRole,
+        setUserRole,
         loginState,
         setLoginState,
         userProfile,
@@ -197,6 +236,7 @@ function App() {
         ownerAddressInput,
         setOwnerAddressInput,
         addToFavourites,
+        addToArchives,
       }}
     >
       <div className="container">

@@ -26,6 +26,11 @@ const Profile = () => {
       // setData(data);
       console.log(data);
       reactCtx.setUserProfile(data);
+
+      if (data.length > 1) {
+        reactCtx.setUserRole("admin");
+        console.log(reactCtx.userRole);
+      }
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -95,10 +100,10 @@ const Profile = () => {
                     <p>Profile Type: {data.profileType}</p>
                   </div>
                   <div>
-                    <p>Address: {data.contact.address}</p>
+                    <p>Address: {data.contact?.address}</p>
                   </div>
                   <div>
-                    <p>Phone: {data.contact.phone}</p>
+                    <p>Phone: {data.contact?.phone}</p>
                   </div>
                   <div>
                     <p>Role: {data.role}</p>

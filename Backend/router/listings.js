@@ -178,7 +178,7 @@ router.patch("/edit", auth, async (req, res) => {
                 req.body.ownerContact?.phone ||
                 ownListingData.ownerContact.phone,
             },
-            comments: req.body.comments || ownListingData.comments,
+            comments: req.body.comments || ownListingData.comments, 
           },
         },
         { new: true }
@@ -198,6 +198,16 @@ router.patch("/favourite", async (req, res) => {
   );
   res.json(newListingData);
 });
+
+// UPDATE LISTING ARCHIVE STATE
+router.patch("/archive", async (req, res) => {
+  const newListingArchive = await Listing.findOneAndUpdate(
+    { _id: req.body.id },
+    { isArchive: true },
+    { new: true }
+  );
+  res.json(newListingArchive);
+})
 
 // DELETE LISTING
 router.delete("/delete", auth, async (req, res) => {
