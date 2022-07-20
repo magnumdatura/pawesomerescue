@@ -202,7 +202,7 @@ const Login = () => {
     <div className="App">
       {/* links to the registration page */}
 
-      <form>
+      <form onSubmit={handleLogin}>
         <div>
           <div>
             <label className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2">
@@ -234,6 +234,7 @@ const Login = () => {
         <div className="w-full mt-2 mb-2 py-2 text-center">
           <button
             onClick={handleLogin}
+            type="submit"
             className="inline-block mx-auto mr-2 w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
           >
             <Link to="/profile">Login</Link>

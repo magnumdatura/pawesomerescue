@@ -38,7 +38,7 @@ function App() {
   const [userProfile, setUserProfile] = useState("");
 
   const [loginState, setLoginState] = useState(false);
-  const [userRole, setUserRole] = useState("");
+  const [userRole, setUserRole] = useState("guest");
 
   // refresh pages
   const [refreshState, setRefreshState] = useState(false);
@@ -91,13 +91,8 @@ function App() {
       setUserProfile(data);
       console.log(userProfile);
 
-      if (data[0].role == "admin") {
+      if (data.length > 1) {
         setUserRole("admin");
-        console.log(userRole);
-      }
-
-      if (data[0].role == "user") {
-        setUserRole("user");
         console.log(userRole);
       }
     } catch (err) {
@@ -157,7 +152,7 @@ function App() {
 
       const data = await res.json();
       console.log(data);
-      window.alert("Listing favourited!");
+      // window.alert("Listing favourited!");
     } catch (err) {
       console.log(err);
     }
