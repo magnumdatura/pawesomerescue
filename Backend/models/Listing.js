@@ -81,7 +81,7 @@ const ListingSchema = new mongoose.Schema(
     dateCreated: {
       type: Date,
       required: true,
-      default: Date.now(),
+      default: Date.now,
     },
   },
   { collection: "listings" }

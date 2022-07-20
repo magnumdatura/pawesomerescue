@@ -55,6 +55,7 @@ function App() {
   const [sizeInput, setSizeInput] = useState("");
   const [ageInput, setAgeInput] = useState("");
   const [medicalInput, setMedicalInput] = useState("");
+  const [commentsInput, setCommentsInput] = useState("");
   const [ownerNameInput, setOwnerNameInput] = useState("");
   const [ownerEmailInput, setOwnerEmailInput] = useState("");
   const [ownerPhoneInput, setOwnerPhoneInput] = useState("");
@@ -173,21 +174,23 @@ function App() {
         listing,
         setListing,
         titleInput,
-        ageInput,
-        setAgeInput,
-        sizeInput,
-        setSizeInput,
-        sexInput,
-        setSexInput,
-        breedInput,
-        setBreedInput,
         setTitleInput,
         petNameInput,
-        medicalInput,
-        setMedicalInput,
         setPetNameInput,
         speciesInput,
         setSpeciesInput,
+        breedInput,
+        setBreedInput,
+        sexInput,
+        setSexInput,
+        sizeInput,
+        setSizeInput,
+        ageInput,
+        setAgeInput,
+        medicalInput,
+        setMedicalInput,
+        commentsInput,
+        setCommentsInput,
         ownerNameInput,
         setOwnerNameInput,
         ownerEmailInput,

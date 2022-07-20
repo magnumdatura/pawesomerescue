@@ -23,6 +23,11 @@ const Form = () => {
     formdata.append("medical", reactCtx.medicalInput);
     formdata.append("comments", reactCtx.commentsInput);
 
+    formdata.append("ownerContact.name", reactCtx.ownerNameInput);
+    formdata.append("ownerContact.email", reactCtx.ownerEmailInput);
+    formdata.append("ownerContact.phone", reactCtx.ownerPhoneInput);
+    formdata.append("ownerContact.address", reactCtx.ownerAddressInput);
+
     // // owner contact not working yet
     // formdata.append("ownerContact", JSON.stringify({
     //   ownerContact: {
