@@ -26,6 +26,11 @@ const Profile = () => {
       // setData(data);
       console.log(data);
       reactCtx.setUserProfile(data);
+
+      if (data.length > 1) {
+        reactCtx.setUserRole("admin");
+        console.log(reactCtx.userRole);
+      }
     } catch (err) {
       // setError(err.message);
       console.log(err);

@@ -71,15 +71,21 @@ const Favourite = () => {
   return (
     <div>
       {userFavourites == "" ? (
-        <div>
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
           <p>Log in to view your favourites!</p>
         </div>
       ) : (
         userFavourites.map((item) => {
           return (
-            <div>
+            <div className="ml-4 my-2 mx-3 pl-2 w-64 h-96 inline-block m-2 p-2 rounded-lg shadow-lg">
+              <h2 className="text-xl">{item[0].title}</h2>
+              <img src={item[0].image} />
               <p>Pet Name: {item[0].petName}</p>
-              <p>Pet Age: {item[0].age}</p>
+              <p>Species: {item[0].species}</p>
+              <p>Breed: {item[0].breed}</p>
+              <p>Sex: {item[0].sex}</p>
+              <p>Size: {item[0].size}</p>
+              <p>Age: {item[0].age}</p>
             </div>
           );
         })

@@ -20,11 +20,14 @@ const NavBar = () => {
               Submit an Adoption
             </NavLink>
           </li>
+          {reactCtx.userRole == "admin" ? (
           <li>
             <NavLink to="/archive" activeClassName={styles.active}>
               Archive
             </NavLink>
-          </li>
+          </li>) : (
+            null
+          )}
           <li>
             <NavLink to="/favourite" activeClassName={styles.active}>
               Favourite
