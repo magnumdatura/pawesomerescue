@@ -4,8 +4,11 @@ import NavBar from "./components/NavBar";
 import NavBar2 from "./components/NavBar2";
 import ReactContext from "./context/react-context";
 
+import Profile from "./pages/Profile";
+import Favourite from "./pages/Favourite";
+
 const Home = React.lazy(() => import("./pages/Home"));
-const Favourite = React.lazy(() => import("./pages/Favourite"));
+// const Favourite = React.lazy(() => import("./pages/Favourite"));
 const Login = React.lazy(() => import("./pages/Login"));
 const Archive = React.lazy(() => import("./pages/Archive"));
 const Form = React.lazy(() => import("./pages/Form"));
@@ -13,7 +16,7 @@ const Dogs = React.lazy(() => import("./pages/Dogs"));
 const Cats = React.lazy(() => import("./pages/Cats"));
 const SmallAnimals = React.lazy(() => import("./pages/SmallAnimals"));
 const CreateProfile = React.lazy(() => import("./components/CreateProfile"));
-const Profile = React.lazy(() => import("./pages/Profile"));
+// const Profile = React.lazy(() => import("./pages/Profile"));
 
 function App() {
   const [access, setAccess] = useState("");
@@ -63,6 +66,45 @@ function App() {
   const [ownerEmailInput, setOwnerEmailInput] = useState("");
   const [ownerPhoneInput, setOwnerPhoneInput] = useState("");
   const [ownerAddressInput, setOwnerAddressInput] = useState("");
+
+  const fetchDisplay = async (url) => {
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + access,
+      },
+    };
+
+    try {
+      const res = await fetch(url, options);
+      console.log(res);
+      console.log(options);
+
+      if (res.status !== 200) {
+        throw new Error("Something went wrong.");
+      }
+
+      const data = await res.json();
+      // setData(data);
+      console.log(data);
+      setUserProfile(data);
+      console.log(userProfile);
+
+      if (data[0].role == "admin") {
+        setUserRole("admin");
+        console.log(userRole);
+      }
+
+      if (data[0].role == "user") {
+        setUserRole("user");
+        console.log(userRole);
+      }
+    } catch (err) {
+      // setError(err.message);
+      console.log(err);
+    }
+  };
 
   const updateListingFavouriteCount = async (url, listingId) => {
     const bod = JSON.stringify({ id: listingId });
@@ -248,6 +290,7 @@ function App() {
         addToArchives,
         refreshState,
         setRefreshState,
+        fetchDisplay,
       }}
     >
       <div className="container">
