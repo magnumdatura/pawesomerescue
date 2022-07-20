@@ -5,6 +5,7 @@ const Form = () => {
   const reactCtx = useContext(ReactContext);
 
   const [uploadImage, setUploadImage] = useState("");
+  const [justSubmitted, setJustSubmitted] = useState(false);
 
   const submitForm = async (url) => {
     const formdata = new FormData();
@@ -46,6 +47,7 @@ const Form = () => {
       const data = await res.json();
       console.log(data);
       window.alert("Listing created!");
+      setJustSubmitted(true);
     } catch (err) {
       console.log(err);
     }
@@ -82,6 +84,10 @@ const Form = () => {
     submitForm("http://localhost:5001/listings/create");
   }
 
+  function clearInputFields(event) {
+    event.preventDefault();
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -98,6 +104,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Title of Listing"
                 id="title"
+                value={reactCtx.titleInput}
                 className="mx-auto m-2 w-2/3 block w-100 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -108,6 +115,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Pet Name"
                 id="petName"
+                value={reactCtx.petNameInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -118,6 +126,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Species"
                 id="species"
+                value={reactCtx.speciesInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -128,6 +137,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Breed"
                 id="breed"
+                value={reactCtx.breedInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -138,6 +148,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Sex"
                 id="sex"
+                value={reactCtx.sexInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -148,6 +159,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Size"
                 id="size"
+                value={reactCtx.sizeInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -158,6 +170,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Age of Pet"
                 id="age"
+                value={reactCtx.ageInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -168,6 +181,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Medical Conditions"
                 id="medical"
+                value={reactCtx.medicalInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -178,6 +192,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Comments"
                 id="comments"
+                value={reactCtx.commentsInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -193,6 +208,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Owner's Name"
                 id="ownerName"
+                value={reactCtx.ownerNameInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -203,6 +219,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Owner's Email"
                 id="ownerEmail"
+                value={reactCtx.ownerEmailInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -213,6 +230,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Owner's Phone"
                 id="ownerPhone"
+                value={reactCtx.ownerPhoneInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -223,6 +241,7 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="Owner's Address"
                 id="ownerAddress"
+                value={reactCtx.ownerAddressInput}
                 className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
               ></input>
@@ -236,19 +255,31 @@ const Form = () => {
                 onChange={handleChange}
                 placeholder="image"
                 id="file"
+                value={uploadImage}
               ></input>
             </div>
           </span>
         </div>
 
-        <div>
-          <button
-            onClick={handleSubmit}
-            className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
-          >
-            Submit Pet!
-          </button>
-        </div>
+        {justSubmitted ? (
+          <div>
+            <button
+              onClick={clearInputFields}
+              className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+            >
+              Clear form
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button
+              onClick={handleSubmit}
+              className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+            >
+              Submit Pet!
+            </button>
+          </div>
+        )}
       </form>
     </>
   );
