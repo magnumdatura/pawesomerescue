@@ -87,34 +87,44 @@ const Profile = () => {
           reactCtx.userProfile.map((data, index) => {
             // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
             return (
-              <span>
-                <div key={index} className="listing">
-                  <div>
-                    <h4>Name: {data.name}</h4>
-                  </div>
-                  <div>
-                    Email Address:
-                    <p id="email">{data.email}</p>
-                  </div>
-                  <div>
-                    <p>Profile Type: {data.profileType}</p>
-                  </div>
-                  <div>
-                    <p>Address: {data.contact?.address}</p>
-                  </div>
-                  <div>
-                    <p>Phone: {data.contact?.phone}</p>
-                  </div>
-                  <div>
-                    <p>Role: {data.role}</p>
-                  </div>
-                  <div>
-                    <button id={data._id} onClick={handleDelete}>
-                      NAT IS WORKING ON THIS DELETE BUTTON
-                    </button>
-                  </div>
+              <div
+                key={index}
+                className="ml-4 my-2 mx-3 pl-2 w-1/4 h-1/4 inline-block m-2 p-2 rounded-lg shadow-lg"
+              >
+                <div>
+                  <p className="p-1 capitalize">Name: {data.name}</p>
                 </div>
-              </span>
+                <div>
+                  <p id="email" className="p-1">
+                    Email Address: {data.email}
+                  </p>
+                </div>
+                <div>
+                  <p className="p-1 capitalize">
+                    Profile Type: {data.profileType}
+                  </p>
+                </div>
+                <div>
+                  <p className="p-1 capitalize">
+                    Address: {data.contact?.address}
+                  </p>
+                </div>
+                <div>
+                  <p className="p-1 capitalize">Phone: {data.contact?.phone}</p>
+                </div>
+                <div>
+                  <p className="p-1 capitalize">Role: {data.role}</p>
+                </div>
+                <div>
+                  <button
+                    id={data._id}
+                    onClick={handleDelete}
+                    className="text-center mx-auto block w-50 m-1 px-3 text-white font-semibold button-85"
+                  >
+                    DELETE
+                  </button>
+                </div>
+              </div>
             );
           })}
       </div>

@@ -71,21 +71,46 @@ const Favourite = () => {
   return (
     <div>
       {userFavourites == "" ? (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
           <p>Log in to view your favourites!</p>
         </div>
       ) : (
         userFavourites.map((item) => {
           return (
             <div className="ml-4 my-2 mx-3 pl-2 w-64 h-96 inline-block m-2 p-2 rounded-lg shadow-lg">
-              <h2 className="text-xl">{item[0].title}</h2>
-              <img src={item[0].image} />
-              <p>Pet Name: {item[0].petName}</p>
-              <p>Species: {item[0].species}</p>
-              <p>Breed: {item[0].breed}</p>
-              <p>Sex: {item[0].sex}</p>
-              <p>Size: {item[0].size}</p>
-              <p>Age: {item[0].age}</p>
+              <div>
+                {/* <img src={require(`../images/${data.image}`)} alt="img" /> */}
+                <img src={require(`../images/charmander.png`)} alt="img" />
+              </div>
+              <div>
+                <p className="text-xl">{item[0].title}</p>
+              </div>
+              <div>
+                <p className="text-m">Pet Name: {item[0].petName}</p>
+              </div>
+              <div>
+                <p className="text-m">Species: {item[0].species}</p>
+              </div>
+              <div>
+                <p className="text-m">Breed: {item[0].breed}</p>
+              </div>
+              <div>
+                <p className="text-m">
+                  Favourite Count: {item[0].favouritesCount}
+                </p>
+              </div>
+              <div>
+                <button
+                  id={item[0]._id}
+                  onClick={reactCtx.addToFavourites}
+                  className="text-center mx-auto block w-50 px-3 text-white font-semibold button-85"
+                >
+                  ♡
+                </button>
+              </div>
             </div>
           );
         })

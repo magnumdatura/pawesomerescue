@@ -58,7 +58,6 @@ const Form = () => {
 
       const data = await res.json();
       console.log(data);
-      reactCtx.setTitleInput(data);
       window.alert("Listing created!");
     } catch (err) {
       console.log(err);
