@@ -179,8 +179,8 @@ router.patch("/user", auth, async (req, res) => {
     );
 
     if (req.body.email === req.decoded.email) {
-      if (req.body.newpassword) {
-        const hash = await bcrypt.hash(req.body.newpassword, 12); // 12-25 is how many times you are salting it
+      if (req.body.newPassword) {
+        const hash = await bcrypt.hash(req.body.newPassword, 12); // 12-25 is how many times you are salting it
         const newUserData2 = await User.findOneAndUpdate(
           { email: req.body.email },
           {
@@ -216,8 +216,8 @@ router.patch("/user", auth, async (req, res) => {
       { new: true }
     );
 
-    if (req.body.newpassword) {
-      const hash = await bcrypt.hash(req.body.newpassword, 12); // 12-25 is how many times you are salting it
+    if (req.body.newPassword) {
+      const hash = await bcrypt.hash(req.body.newPassword, 12); // 12-25 is how many times you are salting it
       const newUserData2 = await User.findOneAndUpdate(
         { email: req.decoded.email },
         {

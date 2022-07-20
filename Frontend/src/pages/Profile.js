@@ -6,6 +6,7 @@ const Profile = () => {
   const reactCtx = useContext(ReactContext);
 
   const [profileEdit, setProfileEdit] = useState(false);
+  const [userEmailToEdit, setUserEmailToEdit] = useState("");
 
   const fetchProfileDelete = async (url) => {
     const bod = JSON.stringify({
@@ -47,28 +48,11 @@ const Profile = () => {
     fetchProfileDelete("http://localhost:5001/users/user");
   }
 
-  function handleProfileEdit(event) {
-    event.preventDefault();
-    setProfileEdit(true);
-
-    // call profile and save data into states
-    if (reactCtx.userRole === "admin") {
-    }
-
-    if (reactCtx.userRole === "user") {
-      reactCtx.setEmailInput(reactCtx.userProfile[0].email);
-      reactCtx.setPasswordInput("");
-      reactCtx.setNameInput(reactCtx.userProfile[0].name);
-      reactCtx.setProfileTypeInput(reactCtx.userProfile[0].profileType);
-      reactCtx.setAddressInput(reactCtx.userProfile[0].contact.address);
-      reactCtx.setPhoneInput(reactCtx.userProfile[0].contact.phone);
-    }
-  }
-
   const fetchProfileUpdate = async (url) => {
     const bod = JSON.stringify({
-      email: reactCtx.emailInput,
-      newpassword: reactCtx.passwordInput,
+      email: userEmailToEdit,
+      newEmail: reactCtx.emailInput,
+      newPassword: reactCtx.passwordInput,
       name: reactCtx.nameInput,
       profileType: reactCtx.profileTypeInput,
       contact: {
@@ -109,6 +93,25 @@ const Profile = () => {
     }
   };
 
+  function handleProfileEdit(event) {
+    event.preventDefault();
+    console.log(event.target.id);
+    setProfileEdit(true);
+
+    // call profile and save data into states
+    setUserEmailToEdit(reactCtx.userProfile[event.target.id].email);
+    reactCtx.setEmailInput(reactCtx.userProfile[event.target.id].email);
+    reactCtx.setPasswordInput("");
+    reactCtx.setNameInput(reactCtx.userProfile[event.target.id].name);
+    reactCtx.setProfileTypeInput(
+      reactCtx.userProfile[event.target.id].profileType
+    );
+    reactCtx.setAddressInput(
+      reactCtx.userProfile[event.target.id].contact.address
+    );
+    reactCtx.setPhoneInput(reactCtx.userProfile[event.target.id].contact.phone);
+  }
+
   function handleInput(event) {
     event.preventDefault();
     // console.log(event.target.id);
@@ -142,7 +145,7 @@ const Profile = () => {
             <div className="justify-center">
               <input
                 type="email"
-                placeholder="Required: Your Email Address"
+                placeholder="Email Address"
                 onChange={handleInput}
                 id="email"
                 value={reactCtx.emailInput}
@@ -153,7 +156,7 @@ const Profile = () => {
             <div>
               <input
                 type="password"
-                placeholder="Required: Alphanumeric"
+                placeholder="New Password"
                 onChange={handleInput}
                 id="password"
                 value={reactCtx.passwordInput}
@@ -164,7 +167,7 @@ const Profile = () => {
             <div>
               <input
                 type="text"
-                placeholder="Required: Your Name"
+                placeholder="Name"
                 onChange={handleInput}
                 id="name"
                 value={reactCtx.nameInput}
@@ -176,7 +179,7 @@ const Profile = () => {
               <div>
                 <input
                   type="text"
-                  placeholder="Optional: Your Address"
+                  placeholder="Address"
                   onChange={handleInput}
                   id="address"
                   value={reactCtx.addressInput}
@@ -187,7 +190,7 @@ const Profile = () => {
               <div>
                 <input
                   type="number"
-                  placeholder="Optional: Your Phone Number"
+                  placeholder="Phone Number"
                   onChange={handleInput}
                   id="phone"
                   value={reactCtx.phoneInput}
@@ -266,7 +269,7 @@ const Profile = () => {
                 </div>
                 <div>
                   <button
-                    id={data._id}
+                    id={index}
                     onClick={handleProfileEdit}
                     className="text-center mx-auto block w-50 m-1 px-3 text-white font-semibold button-85"
                   >
