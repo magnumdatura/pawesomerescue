@@ -41,7 +41,7 @@ router.put("/create", upload.single("image"), auth, async (req, res) => {
     if (req.decoded.role === "user") {
       const createdListing = await Listing.create({
         title: req.body.title,
-        image: req.file?.filename,
+        image: req.file.filename,
         petName: req.body.petName,
         species: req.body.species,
         breed: req.body.breed,

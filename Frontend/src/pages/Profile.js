@@ -95,10 +95,10 @@ const Profile = () => {
                     <p>Profile Type: {data.profileType}</p>
                   </div>
                   <div>
-                    <p>Address: {data.contact.address}</p>
+                    <p>Address: {data.contact?.address}</p>
                   </div>
                   <div>
-                    <p>Phone: {data.contact.phone}</p>
+                    <p>Phone: {data.contact?.phone}</p>
                   </div>
                   <div>
                     <p>Role: {data.role}</p>
