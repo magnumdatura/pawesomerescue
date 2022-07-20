@@ -46,17 +46,33 @@ const Archive = () => {
   return (
     <div>
       {listingArchives &&
-        listingArchives.map((item) => {
+        listingArchives.map((item, index) => {
           return (
-            <div className="ml-4 my-2 mx-3 pl-2 w-64 h-96 inline-block m-2 p-2 rounded-lg shadow-lg">
-              <h2 className="text-xl">{item.title}</h2>
-              <img src={item.image} />
-              <p>Pet Name: {item.petName}</p>
-              <p>Species: {item.species}</p>
-              <p>Breed: {item.breed}</p>
-              <p>Sex: {item.sex}</p>
-              <p>Size: {item.size}</p>
-              <p>Age: {item.age}</p>
+            <div
+              key={index}
+              className="ml-4 my-2 mx-3 pl-2 w-64 h-96 inline-block m-2 p-2 rounded-lg shadow-lg"
+            >
+              <div>
+                {/* <img src={require(`../images/${data.image}`)} alt="img" /> */}
+                <img src={require(`../images/charmander.png`)} alt="img" />
+              </div>
+              <div>
+                <p className="text-xl">{item.title}</p>
+              </div>
+              <div>
+                <p className="text-m">Pet Name: {item.petName}</p>
+              </div>
+              <div>
+                <p className="text-m">Species: {item.species}</p>
+              </div>
+              <div>
+                <p className="text-m">Breed: {item.breed}</p>
+              </div>
+              <div>
+                <p className="text-m">
+                  Favourite Count: {item.favouritesCount}
+                </p>
+              </div>
             </div>
           );
         })}
