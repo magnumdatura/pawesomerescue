@@ -13,7 +13,7 @@ const Listing = require("../models/Listing");
 const auth = require("../middleware/auth");
 
 const selectParams =
-  "title image petName species breed sex size age medical isArchive favouritesCount ownerContact profileContact dateCreated"; // currently set to all params
+  "title image petName species breed sex size age medical isArchive favouritesCount ownerContactName ownerContactEmail ownerContactPhone ownerContactAddress profileContact dateCreated"; // currently set to all params
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -51,12 +51,10 @@ router.put("/create", upload.single("image"), auth, async (req, res) => {
         medical: req.body.medical,
         isArchive: req.body.isArchive,
         favouritesCount: req.body.favouritesCount,
-        ownerContact: {
-          name: req.body.ownerContact?.name,
-          email: req.body.ownerContact?.email,
-          phone: req.body.ownerContact?.phone,
-          address: req.body.ownerContact?.address,
-        },
+        ownerContactName: req.body.ownerContactName,
+        ownerContactEmail: req.body.ownerContactEmail,
+        ownerContactPhone: req.body.ownerContactPhone,
+        ownerContactAddress: req.body.ownerContactAddress,
         profileContact: {
           // here links with payload from users /login
           id: req.decoded.id,
@@ -132,14 +130,14 @@ router.patch("/edit", auth, async (req, res) => {
           isArchive: req.body.isArchive || anyListingData.isArchive,
           favouritesCount:
             req.body.favouritesCount || anyListingData.favouritesCount,
-          ownerContact: {
-            name:
-              req.body.ownerContact?.name || anyListingData.ownerContact.name,
-            email:
-              req.body.ownerContact?.email || anyListingData.ownerContact.email,
-            phone:
-              req.body.ownerContact?.phone || anyListingData.ownerContact.phone,
-          },
+          ownerContactName:
+            req.body.ownerContactName || anyListingData.ownerContactName,
+          ownerContactEmail:
+            req.body.ownerContactEmail || anyListingData.ownerContactEmail,
+          ownerContactPhone:
+            req.body.ownerContactPhone || anyListingData.ownerContactPhone,
+          ownerContactAddress:
+            req.body.ownerContactAddress || anyListingData.ownerContactAddress,
           comments: req.body.comments || anyListingData.comments,
         },
       },
@@ -168,17 +166,16 @@ router.patch("/edit", auth, async (req, res) => {
             isArchive: req.body.isArchive || ownListingData.isArchive,
             favouritesCount:
               req.body.favouritesCount || ownListingData.favouritesCount,
-            ownerContact: {
-              name:
-                req.body.ownerContact?.name || ownListingData.ownerContact.name,
-              email:
-                req.body.ownerContact?.email ||
-                ownListingData.ownerContact.email,
-              phone:
-                req.body.ownerContact?.phone ||
-                ownListingData.ownerContact.phone,
-            },
-            comments: req.body.comments || ownListingData.comments, 
+            ownerContactName:
+              req.body.ownerContactName || ownListingData.ownerContactName,
+            ownerContactEmail:
+              req.body.ownerContactEmail || ownListingData.ownerContactEmail,
+            ownerContactPhone:
+              req.body.ownerContactPhone || ownListingData.ownerContactPhone,
+            ownerContactAddress:
+              req.body.ownerContactAddress ||
+              ownListingData.ownerContactAddress,
+            comments: req.body.comments || ownListingData.comments,
           },
         },
         { new: true }
@@ -207,7 +204,7 @@ router.patch("/archive", async (req, res) => {
     { new: true }
   );
   res.json(newListingArchive);
-})
+});
 
 // DELETE LISTING
 router.delete("/delete", auth, async (req, res) => {

@@ -47,19 +47,17 @@ const ListingSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
-    ownerContact: {
-      name: {
-        type: String,
-      },
-      email: {
-        type: String,
-      },
-      phone: {
-        type: Number,
-      },
-      address: {
-        type: String,
-      },
+    ownerContactName: {
+      type: String,
+    },
+    ownerContactEmail: {
+      type: String,
+    },
+    ownerContactPhone: {
+      type: Number,
+    },
+    ownerContactAddress: {
+      type: String,
     },
     profileContact: {
       id: {
