@@ -21,13 +21,12 @@ const NavBar = () => {
             </NavLink>
           </li>
           {reactCtx.userRole == "admin" ? (
-          <li>
-            <NavLink to="/archive" activeClassName={styles.active}>
-              Archive
-            </NavLink>
-          </li>) : (
-            null
-          )}
+            <li>
+              <NavLink to="/archive" activeClassName={styles.active}>
+                Archive
+              </NavLink>
+            </li>
+          ) : null}
           <li>
             <NavLink to="/favourite" activeClassName={styles.active}>
               Favourite
@@ -42,7 +41,7 @@ const NavBar = () => {
           ) : (
             <li>
               <NavLink to="/login" activeClassName={styles.active}>
-                Profile
+                Login
               </NavLink>
             </li>
           )}

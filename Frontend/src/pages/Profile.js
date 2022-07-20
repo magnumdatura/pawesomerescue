@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import ReactContext from "../context/react-context";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const reactCtx = useContext(ReactContext);
@@ -64,6 +65,7 @@ const Profile = () => {
       // setData(data);
       console.log(data);
       reactCtx.setUserProfile(data);
+      window.location.reload();
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -121,7 +123,7 @@ const Profile = () => {
                     onClick={handleDelete}
                     className="text-center mx-auto block w-50 m-1 px-3 text-white font-semibold button-85"
                   >
-                    DELETE
+                    <Link to="/home">Delete</Link>
                   </button>
                 </div>
               </div>
