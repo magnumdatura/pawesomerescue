@@ -198,7 +198,7 @@ router.patch("/favourite", async (req, res) => {
 router.patch("/archive", async (req, res) => {
   const newListingArchive = await Listing.findOneAndUpdate(
     { _id: req.body.id },
-    { isArchive: true },
+    { isArchive: req.body.isArchive },
     { new: true }
   );
   res.json(newListingArchive);

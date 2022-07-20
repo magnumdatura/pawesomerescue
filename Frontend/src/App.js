@@ -182,8 +182,8 @@ function App() {
     refreshState ? setRefreshState(false) : setRefreshState(true);
   }
 
-  const updateListingArchive = async (url, listingId) => {
-    const bod = JSON.stringify({ id: listingId });
+  const updateListingArchive = async (url, listingId, boolean) => {
+    const bod = JSON.stringify({ id: listingId, isArchive: boolean });
 
     const options = {
       method: "PATCH",
@@ -214,7 +214,20 @@ function App() {
 
     updateListingArchive(
       "http://localhost:5001/listings/archive",
-      event.target.id
+      event.target.id,
+      true,
+    );
+
+    refreshState ? setRefreshState(false) : setRefreshState(true);
+  }
+
+  function removeFromArchive(event) {
+    event.preventDefault();
+
+    updateListingArchive(
+      "http://localhost:5001/listings/archive",
+      event.target.id,
+      false,
     );
 
     refreshState ? setRefreshState(false) : setRefreshState(true);
@@ -291,6 +304,7 @@ function App() {
         refreshState,
         setRefreshState,
         fetchDisplay,
+        removeFromArchive,
       }}
     >
       <div className="container">

@@ -7,7 +7,7 @@ const Archive = () => {
 
   useEffect(() => {
     displayListingsArchives("http://localhost:5001/listings/displayAll");
-  }, []);
+  }, [reactCtx.refreshState]);
 
   const displayListingsArchives = async (url) => {
     const options = {
@@ -72,6 +72,15 @@ const Archive = () => {
                 <p className="text-m">
                   Favourite Count: {item.favouritesCount}
                 </p>
+              </div>
+              <div>
+                <button
+                  id={item._id}
+                  onClick={reactCtx.removeFromArchive}
+                  className="text-center mx-auto inline-block w-50 px-3 mx-6 text-white font-semibold button-85"
+                >
+                  Un-archive
+                </button>
               </div>
             </div>
           );
