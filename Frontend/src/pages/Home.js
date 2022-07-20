@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const reactCtx = useContext(ReactContext);
+ 
 
   // combined displayAll + search listings
   const fetchListings = async (url) => {
@@ -23,6 +24,15 @@ const Home = () => {
 
       const data = await res.json();
       console.log(data);
+
+      const displayListings = []
+      // archive filter (display isArchive == false)
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].isArchive === false) {
+          displayListings.push(data[i])
+        }
+      }
+
       // SEARCH filter
       function filterByValue(array, string) {
         return array.filter((o) => {
@@ -34,7 +44,7 @@ const Home = () => {
         });
       }
 
-      const filterSearch = filterByValue(data, reactCtx.searchListingInput);
+      const filterSearch = filterByValue(displayListings, reactCtx.searchListingInput);
       reactCtx.setListing(filterSearch);
       console.log(reactCtx.listing);
     } catch (error) {
@@ -51,7 +61,7 @@ const Home = () => {
   useEffect(() => {
     fetchListings("http://localhost:5001/listings/displayAll");
     // eslint-disable-next-line
-  }, [reactCtx.searchListingInput]);
+  }, [reactCtx.searchListingInput, reactCtx.refreshState]);
 
   function submitListingSearch(event) {
     event.preventDefault();

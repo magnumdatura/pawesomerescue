@@ -38,6 +38,9 @@ function App() {
   const [loginState, setLoginState] = useState(false);
   const [userRole, setUserRole] = useState("");
 
+  // refresh pages
+  const [refreshState, setRefreshState] = useState(false)
+
   //password1 for the sign up page
   //profile
   const [emailInput, setEmailInput] = useState("");
@@ -134,6 +137,8 @@ function App() {
       "http://localhost:5001/users/favourites",
       event.target.id
     );
+
+    refreshState ? setRefreshState(false) : setRefreshState(true)
   }
 
   const updateListingArchive = async (url, listingId) => {
@@ -170,6 +175,8 @@ function App() {
       "http://localhost:5001/listings/archive",
       event.target.id
     );
+
+    refreshState ? setRefreshState(false) : setRefreshState(true)
   }
 
   return (
@@ -240,6 +247,8 @@ function App() {
         setOwnerAddressInput,
         addToFavourites,
         addToArchives,
+        refreshState,
+        setRefreshState,
       }}
     >
       <div className="container">
