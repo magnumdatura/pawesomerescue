@@ -5,40 +5,42 @@ import { Link } from "react-router-dom";
 const Profile = () => {
   const reactCtx = useContext(ReactContext);
 
-  const fetchDisplay = async (url) => {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: "Bearer " + reactCtx.access,
-      },
-    };
+  // const fetchDisplay = async (url) => {
+  //   const options = {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       authorization: "Bearer " + reactCtx.access,
+  //     },
+  //   };
 
-    try {
-      const res = await fetch(url, options);
-      console.log(res);
-      console.log(options);
+  //   try {
+  //     const res = await fetch(url, options);
+  //     console.log(res);
+  //     console.log(options);
 
-      if (res.status !== 200) {
-        throw new Error("Something went wrong.");
-      }
+  //     if (res.status !== 200) {
+  //       throw new Error("Something went wrong.");
+  //     }
 
-      const data = await res.json();
-      // setData(data);
-      console.log(data);
-      reactCtx.setUserProfile(data);
+  //     const data = await res.json();
+  //     // setData(data);
+  //     console.log(data);
+  //     reactCtx.setUserProfile(data);
+  //     console.log(reactCtx.userProfile)
 
-      if (data.length > 1) {
-        reactCtx.setUserRole("admin");
-        console.log(reactCtx.userRole);
-      }
-    } catch (err) {
-      // setError(err.message);
-      console.log(err);
-    }
-  };
-  //WIP NAT
-  const fetchDelete = async (url) => {
+  //     // THIS NEEDS TO CHANGE IMMEDIATELY WHEN AVAILABLE
+  //     if (data.length > 1) {
+  //       reactCtx.setUserRole("admin");
+  //       console.log(reactCtx.userRole);
+  //     }
+  //   } catch (err) {
+  //     // setError(err.message);
+  //     console.log(err);
+  //   }
+  // };
+  
+  const fetchProfileDelete = async (url) => {
     const bod = JSON.stringify({
       email: reactCtx.EmailInput,
     });
@@ -71,15 +73,15 @@ const Profile = () => {
       console.log(err);
     }
   };
-  //WIP
-  function handleDelete(event) {
+  
+  function handleProfileDelete(event) {
     event.preventDefault();
     if (event.target.id === "email") reactCtx.setEmailInput(event.target.value);
-    fetchDelete("http://localhost:5001/users/user");
+    fetchProfileDelete("http://localhost:5001/users/user");
   }
 
   useEffect(() => {
-    fetchDisplay("http://localhost:5001/users/users"); // eslint-disable-next-line
+    reactCtx.fetchDisplay("http://localhost:5001/users/users"); // eslint-disable-next-line
   }, [reactCtx.loginState]);
 
   return (
@@ -120,7 +122,7 @@ const Profile = () => {
                 <div>
                   <button
                     id={data._id}
-                    onClick={handleDelete}
+                    onClick={handleProfileDelete}
                     className="text-center mx-auto block w-50 m-1 px-3 text-white font-semibold button-85"
                   >
                     <Link to="/home">Delete</Link>

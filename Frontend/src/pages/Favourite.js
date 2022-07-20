@@ -4,15 +4,16 @@ import ReactContext from "../context/react-context";
 const Favourite = () => {
   const reactCtx = useContext(ReactContext);
 
-  const userProfile = reactCtx.userProfile;
-  console.log(userProfile);
-  const favIDArr = userProfile[0]?.favourites;
-  console.log(favIDArr);
+  console.log(reactCtx.userProfile);
   const [userFavourites, setUserFavourites] = useState([]);
 
   useEffect(() => {
+    reactCtx.fetchDisplay("http://localhost:5001/users/users");
+  }, []);
+
+  useEffect(() => {
     displayUserFavourites("http://localhost:5001/listings/displayAll");
-  }, [userProfile]);
+  }, [reactCtx.userProfile]);
 
   const displayUserFavourites = async (url) => {
     const options = {
@@ -49,10 +50,12 @@ const Favourite = () => {
           });
         });
       }
-      console.log(favIDArr);
-      const filterFavourites = favIDArr.map((id, index) => {
-        return filterByValue(data, id);
-      });
+      console.log(reactCtx.userProfile[0]?.favourites);
+      const filterFavourites = reactCtx.userProfile[0]?.favourites.map(
+        (id, index) => {
+          return filterByValue(data, id);
+        }
+      );
 
       // console.log(filterFavourites[2][0].petName);
       console.log(filterFavourites);
