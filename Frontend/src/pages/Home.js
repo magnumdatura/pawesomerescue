@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const reactCtx = useContext(ReactContext);
- 
 
   // combined displayAll + search listings
   const fetchListings = async (url) => {
@@ -25,11 +24,11 @@ const Home = () => {
       const data = await res.json();
       console.log(data);
 
-      const displayListings = []
+      const displayListings = [];
       // archive filter (display isArchive == false)
       for (let i = 0; i < data.length; i++) {
         if (data[i].isArchive === false) {
-          displayListings.push(data[i])
+          displayListings.push(data[i]);
         }
       }
 
@@ -44,7 +43,10 @@ const Home = () => {
         });
       }
 
-      const filterSearch = filterByValue(displayListings, reactCtx.searchListingInput);
+      const filterSearch = filterByValue(
+        displayListings,
+        reactCtx.searchListingInput
+      );
       reactCtx.setListing(filterSearch);
       console.log(reactCtx.listing);
     } catch (error) {

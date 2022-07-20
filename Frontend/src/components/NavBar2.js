@@ -20,7 +20,7 @@ const NavBar2 = () => {
           </li>
           <li>
             <NavLink to="/smallanimals" activeClassName={styles.active}>
-              Small Animals
+              Others
             </NavLink>
           </li>
         </ul>

@@ -38,36 +38,34 @@ let upload = multer({ storage, fileFilter });
 // CREATE LISTING
 router.put("/create", upload.single("image"), auth, async (req, res) => {
   try {
-    if (req.decoded.role === "user") {
-      const createdListing = await Listing.create({
-        title: req.body.title,
-        image: req.file?.filename,
-        petName: req.body.petName,
-        species: req.body.species,
-        breed: req.body.breed,
-        sex: req.body.sex,
-        size: req.body.size,
-        age: req.body.age,
-        medical: req.body.medical,
-        isArchive: req.body.isArchive,
-        favouritesCount: req.body.favouritesCount,
-        ownerContactName: req.body.ownerContactName,
-        ownerContactEmail: req.body.ownerContactEmail,
-        ownerContactPhone: req.body.ownerContactPhone,
-        ownerContactAddress: req.body.ownerContactAddress,
-        profileContact: {
-          // here links with payload from users /login
-          id: req.decoded.id,
-          name: req.decoded.name,
-          email: req.decoded.email,
-        },
-        comments: req.body.comments,
-        dateCreated: req.body.dateCreated,
-      });
+    const createdListing = await Listing.create({
+      title: req.body.title,
+      image: req.file?.filename,
+      petName: req.body.petName,
+      species: req.body.species,
+      breed: req.body.breed,
+      sex: req.body.sex,
+      size: req.body.size,
+      age: req.body.age,
+      medical: req.body.medical,
+      isArchive: req.body.isArchive,
+      favouritesCount: req.body.favouritesCount,
+      ownerContactName: req.body.ownerContactName,
+      ownerContactEmail: req.body.ownerContactEmail,
+      ownerContactPhone: req.body.ownerContactPhone,
+      ownerContactAddress: req.body.ownerContactAddress,
+      profileContact: {
+        // here links with payload from users /login
+        id: req.decoded.id,
+        name: req.decoded.name,
+        email: req.decoded.email,
+      },
+      comments: req.body.comments,
+      dateCreated: req.body.dateCreated,
+    });
 
-      console.log("created listing:  ", createdListing);
-      res.json({ status: "ok", message: "listing created" });
-    }
+    console.log("created listing:  ", createdListing);
+    res.json({ status: "ok", message: "listing created" });
   } catch (error) {
     console.log("PUT /create", error); // on server
     res.status(400).json({
@@ -220,6 +218,40 @@ router.delete("/delete", auth, async (req, res) => {
       res.json(deleteListing);
     }
   }
+});
+
+// SEED DATA
+router.get("/seed", async (req, res) => {
+  //to make sure that the data you are seeding is the right data, you can remove the rest first
+  await Listing.deleteMany();
+
+  await Listing.create(
+    {
+      title: "Pup for adoption",
+      image: "dog image",
+      petName: "Pet Name",
+      species: "Pet Species",
+      breed: "Pet Breed",
+      sex: "Pet Sex",
+      size: "Pet size",
+      age: "Pet age",
+      medical: "Pet dead",
+      ownerContactName: "Contact name",
+      ownerContactEmail: "contact email",
+      ownerContactPhone: "999",
+      ownerContactAddress: "contact add",
+      comments: "comments",
+    },
+
+    (err, data) => {
+      if (err) {
+        console.log("GET /seed error:" + err.message);
+        res.status(400).json({ status: "error", message: "seeding error" });
+      } else {
+        res.json({ status: "ok", message: "seeding successful" });
+      }
+    }
+  );
 });
 
 module.exports = router;
