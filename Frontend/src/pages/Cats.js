@@ -80,9 +80,25 @@ const Cats = () => {
                 </p>
               </div>
               <div>
-                <button id={data._id} onClick={reactCtx.addToFavourites}>
+                <button
+                  id={data._id}
+                  onClick={reactCtx.addToFavourites}
+                  className="text-center mx-auto inline-block w-50 px-3 ml-4 text-white font-semibold button-85"
+                >
                   Favourite
                 </button>
+
+                {reactCtx.userRole == "admin" ? (
+                  <button
+                    id={data._id}
+                    onClick={reactCtx.addToArchives}
+                    className="text-center mx-auto inline-block w-50 px-3 mx-6 text-white font-semibold button-85"
+                  >
+                    Archive
+                  </button>
+                ) : (
+                  <div></div>
+                )}
               </div>
             </div>
           );
