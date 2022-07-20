@@ -142,17 +142,21 @@ const Form = () => {
               focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
                 ></input>
               </div>
+
               <div>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  placeholder="Species"
+                <select
                   id="species"
-                  value={reactCtx.speciesInput}
+                  onChange={handleChange}
                   className="mx-auto m-2 w-2/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400 capitalize
-              focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
-                ></input>
+                  focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
+                >
+                  <option value="">Species</option>
+                  <option value="dog">Dogs</option>
+                  <option value="cat">Cats</option>
+                  <option value="others">Others</option>
+                </select>
               </div>
+
               <div>
                 <input
                   type="text"

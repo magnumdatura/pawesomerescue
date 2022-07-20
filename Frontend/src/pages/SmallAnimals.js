@@ -34,7 +34,7 @@ const SmallAnimals = () => {
         });
       }
 
-      const filterDogs = filterByValue(data, "dog");
+      const filterDogs = filterByValue(data, "others");
       console.log(filterDogs);
 
       reactCtx.setDogListing(filterDogs);

@@ -26,7 +26,9 @@ const NavBar = () => {
                 Archive
               </NavLink>
             </li>
-          ) : null}
+          ) : (
+            <></>
+          )}
           <li>
             <NavLink to="/favourite" activeClassName={styles.active}>
               Favourite
