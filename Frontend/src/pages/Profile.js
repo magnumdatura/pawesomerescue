@@ -101,7 +101,6 @@ const Profile = () => {
     // call profile and save data into states
     setUserEmailToEdit(reactCtx.userProfile[event.target.id].email);
     reactCtx.setEmailInput(reactCtx.userProfile[event.target.id].email);
-    reactCtx.setPasswordInput("");
     reactCtx.setNameInput(reactCtx.userProfile[event.target.id].name);
     reactCtx.setProfileTypeInput(
       reactCtx.userProfile[event.target.id].profileType
