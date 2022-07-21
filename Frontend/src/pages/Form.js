@@ -293,7 +293,7 @@ const Form = () => {
             <div>
               <button
                 onClick={handleSubmit}
-                className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+                className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2 text-white font-semibold button-85"
               >
                 Submit Pet!
               </button>
@@ -304,7 +304,7 @@ const Form = () => {
             <div>
               <button
                 onClick={clearInputFields}
-                className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+                className="text-center mx-auto m-2 w-1/3 block w-50 px-3 py-2 text-white font-semibold button-85"
               >
                 Clear form
               </button>
