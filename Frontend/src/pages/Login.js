@@ -109,11 +109,11 @@ const Login = () => {
           <button
             onClick={handleLogin}
             type="submit"
-            className="inline-block mx-auto mr-2 w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+            className="inline-block mx-auto mr-4 w-50 px-3 py-2 text-white font-semibold ml-4 rounded-lg shadow-md button-85"
           >
             <Link to="/profile">Login</Link>
           </button>
-          <button className="inline-block mx-auto w-50 px-3 py-2 text-white font-semibold rounded-lg shadow-md bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75">
+          <button className="inline-block mx-auto w-50 px-3 py-2 text-white font-semibold mr-4 rounded-lg shadow-md button-85">
             <Link to="/register">Register</Link>
           </button>
         </div>
