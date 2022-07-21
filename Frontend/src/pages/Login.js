@@ -43,6 +43,7 @@ const Login = () => {
       reactCtx.setAccess(access_token);
       reactCtx.setRefresh(refresh_token);
       reactCtx.setLoginState(true);
+      reactCtx.setLoginEmail(reactCtx.emailInput);
       // alert("Logged in");
     } catch (err) {
       // setError(err.message);
@@ -84,6 +85,7 @@ const Login = () => {
             type="email"
             onChange={handleInput}
             id="email"
+            value={reactCtx.emailInput}
             className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400
             focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
           ></input>
@@ -98,6 +100,7 @@ const Login = () => {
             type="password"
             onChange={handleInput}
             id="password"
+            value={reactCtx.passwordInput}
             className="mx-auto m-2 w-1/3 block w-50 px-3 py-2 bg-white border-1 border-slate-300 rounded-md text-sm shadow-md placeholder-slate-400
             focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:italic"
           ></input>

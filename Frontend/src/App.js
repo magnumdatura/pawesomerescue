@@ -38,6 +38,7 @@ function App() {
   const [userProfile, setUserProfile] = useState("");
 
   const [loginState, setLoginState] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
   const [userRole, setUserRole] = useState("guest");
 
   // refresh pages
@@ -215,7 +216,7 @@ function App() {
     updateListingArchive(
       "http://localhost:5001/listings/archive",
       event.target.id,
-      true,
+      true
     );
 
     refreshState ? setRefreshState(false) : setRefreshState(true);
@@ -227,7 +228,7 @@ function App() {
     updateListingArchive(
       "http://localhost:5001/listings/archive",
       event.target.id,
-      false,
+      false
     );
 
     refreshState ? setRefreshState(false) : setRefreshState(true);
@@ -241,6 +242,8 @@ function App() {
         setUserRole,
         loginState,
         setLoginState,
+        loginEmail,
+        setLoginEmail,
         userProfile,
         setUserProfile,
         searchListingInput,
