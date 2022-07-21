@@ -66,7 +66,7 @@ const Login = () => {
     if (reactCtx.emailInput.includes("@")) {
       fetchLogin("http://localhost:5001/users/login");
     } else {
-      window.alert(`WRONG ADOPTION SERVER: UR STILL A LOSTBOI`);
+      window.alert(`Please enter correct details`);
     }
   }
 
