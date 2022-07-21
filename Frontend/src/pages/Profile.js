@@ -8,9 +8,9 @@ const Profile = () => {
   const [profileEdit, setProfileEdit] = useState(false);
   const [userEmailToEdit, setUserEmailToEdit] = useState("");
 
-  const fetchProfileDelete = async (url) => {
+  const fetchProfileDelete = async (url, profileEmailToDelete) => {
     const bod = JSON.stringify({
-      email: reactCtx.EmailInput,
+      email: profileEmailToDelete,
     });
 
     const options = {
@@ -34,8 +34,18 @@ const Profile = () => {
       const data = await res.json();
       // setData(data);
       console.log(data);
-      reactCtx.setUserProfile(data);
-      window.location.reload();
+      // reactCtx.setUserProfile(data);
+
+      if (reactCtx.userRole == "user") {
+        window.location.reload();
+        // window.location.replace("http://localhost:3000/home");
+      }
+
+      if (reactCtx.userRole == "admin") {
+        reactCtx.refreshState
+          ? reactCtx.setRefreshState(false)
+          : reactCtx.setRefreshState(true);
+      }
     } catch (err) {
       // setError(err.message);
       console.log(err);
@@ -44,8 +54,9 @@ const Profile = () => {
 
   function handleProfileDelete(event) {
     event.preventDefault();
-    if (event.target.id === "email") reactCtx.setEmailInput(event.target.value);
-    fetchProfileDelete("http://localhost:5001/users/user");
+    console.log(event.target.id);
+    // if (event.target.id == reactCtx.loginEmail) reactCtx.setEmailInput(event.target.value);
+    fetchProfileDelete("http://localhost:5001/users/user", event.target.id);
   }
 
   const fetchProfileUpdate = async (url) => {
@@ -259,11 +270,16 @@ const Profile = () => {
                 </div>
                 <div>
                   <button
-                    id={data._id}
+                    id={data.email}
                     onClick={handleProfileDelete}
                     className="text-center mx-auto block w-50 m-1 px-3 text-white font-semibold button-85"
                   >
-                    <Link to="/home">Delete</Link>
+                    {/* Delete */}
+                    {reactCtx.loginEmail == data.email ? (
+                      <Link to="/home">Delete</Link>
+                    ) : (
+                      "Delete"
+                    )}
                   </button>
                 </div>
                 <div>

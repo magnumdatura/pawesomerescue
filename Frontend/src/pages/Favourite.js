@@ -9,7 +9,7 @@ const Favourite = () => {
 
   useEffect(() => {
     reactCtx.fetchDisplay("http://localhost:5001/users/users");
-  }, []);
+  }, [reactCtx.refreshState]);
 
   useEffect(() => {
     displayUserFavourites("http://localhost:5001/listings/displayAll");
