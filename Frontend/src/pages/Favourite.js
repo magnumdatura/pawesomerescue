@@ -34,14 +34,6 @@ const Favourite = () => {
       const data = await res.json();
       console.log(data);
 
-      // data.forEach((listing) => {
-      //   for (const id of favIDArr) {
-      //     if (listing._id === id) {
-      //       setUserFavourites([...userFavourites, listing]);
-      //     }
-      //   }
-      // });
-
       function filterByValue(array, string) {
         return array.filter((o) => {
           // .filter will return array of the values that passed .some (boolean) test
@@ -64,12 +56,6 @@ const Favourite = () => {
       console.log(err);
     }
   };
-
-  // const userFavourites = userProfile[0].favourites.map((favouriteID, index) => {
-  //   displayUserFavourites(favouriteID);
-  // });
-
-  // console.log(userFavourites);
 
   return (
     <div>
@@ -97,7 +83,7 @@ const Favourite = () => {
                   alt="img"
                   className="mx-auto max-h-48 w-auto"
                 />
-                {/* <img src={require(`../images/charmander.png`)} alt="img" /> */}
+              
               </div>
               <div>
                 <p className="text-xl">{item[0].title}</p>

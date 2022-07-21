@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import ReactContext from "../context/react-context";
+import Link from "react-router-dom"
 
 const CreateProfile = () => {
   const reactCtx = useContext(ReactContext);
@@ -45,7 +46,7 @@ const CreateProfile = () => {
       reactCtx.setProfileTypeInput(data.profiletype);
       reactCtx.setAddressInput(data.contact?.address);
       reactCtx.setPhoneInput(data.contact?.phone);
-      alert("profile created");
+      // alert("profile created");
     } catch (err) {
       // setError(err.message);
       console.log(err);
