@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ReactContext from "../context/react-context";
-import Link from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const CreateProfile = () => {
   const reactCtx = useContext(ReactContext);
@@ -147,7 +147,7 @@ const CreateProfile = () => {
             onClick={handleRegister}
             className="mx-auto block w-50 px-3 py-2 text-white font-semibold button-85"
           >
-            REGISTER
+            <Link to="/login">Register</Link>
           </button>
         </div>
       </form>
