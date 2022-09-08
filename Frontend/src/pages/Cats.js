@@ -26,7 +26,7 @@ const Cats = () => {
       console.log(data);
 
       function filterByValue(array, string) {
-        return array.filter((o) => {
+        return array?.filter((o) => {
           return Object.keys(o).some((k) => {
             if (typeof o[k] === "string")
               return o[k].toLowerCase().includes(string.toLowerCase());
@@ -51,7 +51,7 @@ const Cats = () => {
   return (
     <>
       {reactCtx.catListing &&
-        reactCtx.catListing.map((data, index) => {
+        reactCtx.catListing?.map((data, index) => {
           // need conditional rendering because initially displayAll is undefined because its empty. When we do displayAll && it will render when it returns true aka when displayAll is not empty aka not undefined, aka its populated
           return (
             <div
@@ -60,7 +60,7 @@ const Cats = () => {
             >
               <div>
                 <img
-                  src={require(`../images/${data.image}`)}
+                  src={require(`../images/${data?.image}`)}
                   alt="img"
                   className="mx-auto max-h-48 w-auto"
                 />

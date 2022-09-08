@@ -74,16 +74,15 @@ const Favourite = () => {
           <p>No favourites to display</p>
         </div>
       ) : (
-        userFavourites.map((item) => {
+        userFavourites?.map((item) => {
           return (
             <div className="ml-4 my-2 mx-3 pl-2 w-64 h-96 inline-block m-2 p-2 rounded-lg shadow-lg">
               <div>
                 <img
-                  src={require(`../images/${item[0].image}`)}
+                  src={require(`../images/${item[0]?.image}`)}
                   alt="img"
                   className="mx-auto max-h-48 w-auto"
                 />
-              
               </div>
               <div>
                 <p className="text-xl">{item[0].title}</p>
